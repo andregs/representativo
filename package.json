@@ -13,7 +13,6 @@
     "e2e": "protractor"
   },
   "private": true,
-  "main": "karma.conf.js",
   "homepage": "https://github.com/andregs/representativo#readme",
   "repository": {
     "type": "git",

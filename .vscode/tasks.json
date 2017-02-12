@@ -8,12 +8,12 @@
   "suppressTaskName": true,
   "tasks": [
     {
-      "taskName": "angular-cli init",
-      "args": ["run", "reinit"]
-    },
-    {
       "taskName": "npm install",
       "args": ["install"]
+    },
+    {
+      "taskName": "npm run (lista todas as tarefas de build)",
+      "args": ["run"]
     },
     {
       "taskName": "npm run build",

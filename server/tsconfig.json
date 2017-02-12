@@ -1,14 +1,14 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "../dist/public/out-tsc-e2e",
+    "mapRoot": "../dist",
+    "outDir": "../dist",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es6",
     "typeRoots": [
       "../node_modules/@types"
     ]

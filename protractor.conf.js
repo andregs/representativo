@@ -17,7 +17,7 @@ exports.config = {
     // { browserName: 'MicrosoftEdge' },
     // { browserName: 'firefox', marionette: true },
   ],
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://localhost:3000/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

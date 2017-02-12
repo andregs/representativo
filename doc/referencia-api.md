@@ -1,7 +1,7 @@
 # Documentação da API
 
-| [README](../README.md) | [Modelo de Dados](./doc/modelo-dados.md) | Referência da API |
-|------------------------|------------------------------------------|-------------------|
+| [README](../README.md) | [Modelo de Dados](./modelo-dados.md) | Referência da API |
+|------------------------|--------------------------------------|-------------------|
 
 ## Endpoints para Gerenciamento dos Usuários
 

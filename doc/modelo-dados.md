@@ -1,7 +1,7 @@
 # Modelo de Dados
 
-| [README](../README.md) | Modelo de Dados | [Referência da API](./doc/referencia-api.md) |
-|------------------------|-----------------|----------------------------------------------|
+| [README](../README.md) | Modelo de Dados | [Referência da API](./referencia-api.md) |
+|------------------------|-----------------|------------------------------------------|
 
 Esta é a definição dos grafos que compõem o banco de dados do Representativo.
 

@@ -3,10 +3,15 @@
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
-    "dist": true
+    "dist": true,
+    "coverage": true
   },
   "files.eol": "\n",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "tsimporter.filesToExclude": [
+    "./coverage/**",
+    "./dist/**"
+  ]
 }

@@ -1,0 +1,61 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "0.1.0",
+  "command": "npm",
+  "isShellCommand": true,
+  "showOutput": "always",
+  "suppressTaskName": true,
+  "tasks": [
+    {
+      "taskName": "angular-cli init",
+      "args": ["run", "reinit"]
+    },
+    {
+      "taskName": "npm install",
+      "args": ["install"]
+    },
+    {
+      "taskName": "npm run build",
+      "args": ["run", "build"],
+      "isBuildCommand": true
+    },
+    {
+      "taskName": "npm run build-prod (para ambiente de produção)",
+      "args": ["run", "build-prod"]
+    },
+    {
+      "taskName": "npm run build-watch",
+      "args": ["run", "build-watch"]
+    },
+    {
+      "taskName": "npm run dev (build-watch & test-watch)",
+      "args": ["run", "dev"],
+      "isBackground": true
+    },
+    {
+      "taskName": "npm run e2e",
+      "args": ["run", "e2e"]
+    },
+    {
+      "taskName": "npm run nodemon (inicia um server de desenvolvimento)",
+      "args": ["run", "nodemon"],
+      "isBackground": true
+    },
+    {
+      "taskName": "npm run start (inicia um server padrão)",
+      "args": ["run", "start"],
+      "isBackground": true
+    },
+    {
+      "taskName": "npm run test",
+      "args": ["run", "test"],
+      "isTestCommand": true
+    },
+    {
+      "taskName": "npm run test-watch",
+      "args": ["run", "test-watch"],
+      "isBackground": true
+    }
+  ]
+}

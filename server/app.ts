@@ -7,9 +7,7 @@ import { json } from 'body-parser';
 export class RepresentativoServer {
 
   private express = express();
-  private routes = [
-    '/'
-  ];
+  private routes = [];
 
   server: Server;
 
@@ -21,7 +19,7 @@ export class RepresentativoServer {
     this.routes.forEach(
       route => this.express.get(
         route,
-        (req, res) => res.render('index', {})
+        (req, res) => res.sendFile(__dirname + '/public/index.html')
       )
     );
   }

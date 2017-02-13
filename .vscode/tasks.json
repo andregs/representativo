@@ -56,6 +56,11 @@
       "taskName": "npm run test-watch",
       "args": ["run", "test-watch"],
       "isBackground": true
+    },
+    {
+      "taskName": "npm run tunnel (gera uma URL pública para o app)",
+      "args": ["run", "tunnel"],
+      "isBackground": true
     }
   ]
 }

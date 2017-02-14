@@ -1,9 +1,13 @@
 'use strict';
 
+/**
+ * Este script exclui o banco de dados no ArangoDB.
+ */
+
 const config = require('../app-config');
 const arangojs = require('arangojs');
 
-const { rootpasswd, username, password } = config.arangodb;
+const { rootpasswd } = config.arangodb;
 
 const host = 'localhost';
 const port = '8529';

@@ -1,11 +1,17 @@
-function signupOnArango(user, context, callback) {
+/**
+ * Esta rule garante que, no primeiro login, o novo usuário será criado também no nosso ArangoDB.
+ * Ela é executada em cada login bem sucedido, por isso no início checa se o usuário já foi processado.
+ */
+export function signupOnArango(user, context, callback) {
   user.app_metadata = user.app_metadata || {};
   if (user.app_metadata.signedUp || context.connection !== 'RE-Users') {
-    console.log('ignoring rule', user.app_metadata.signedUp, context.connection);
+    console.log('ignoring rule for user', user.user_id, 'connection', context.connection);
     return callback(null, user, context);
   }
 
   var request = require('request-promise');
+
+  // traduz as propriedades para o formato que usamos no ArangoDB
   var body = {
     _key: user.username,
     auth0Id: user.user_id,
@@ -17,6 +23,7 @@ function signupOnArango(user, context, callback) {
     createdAt: user.created_at,
     updatedAt: user.updated_at
   };
+
   var options = {
     method: 'POST',
     uri: 'https://representativo.localtunnel.me/api/user/signup',

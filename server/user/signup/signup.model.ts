@@ -1,5 +1,10 @@
 import { Database } from 'arangojs';
 
+/**
+ * Cadastra um novo usuário no app.
+ *
+ * TODO cerialize no userBody?
+ */
 function signup(userBody: any, db: Database) {
   const action = String(function (params) {
     const gm = require("@arangodb/general-graph");
@@ -7,25 +12,22 @@ function signup(userBody: any, db: Database) {
     const _ = require('underscore');
 
     const userData = _.omit(params, _.isUndefined);
-    console.log('user data', params, userData);
-    let user = graph.user.firstExample({ _key: userData._key || 'foo' });
-    console.log('user found?', user);
+    let user = graph.user.firstExample({ _key: userData._key });
 
-    if (user === null) { // first login (sign up)
+    if (user === null) {
+      // normalmente os usuários são criados no Auth0 e, então, seus dados vêm pra cá
       user = graph.user.save(userData);
-    } else { // update existing user
+    } else {
+      // mas, em casos como o do usuário `admin`, o registro já existe no BD antes do Auth0
       user = graph.user.update(userData._key, userData);
     }
     user = Object.assign(userData, user);
-    console.log('saved', user);
 
     user = graph.user.firstExample({ _key: user._key });
-    console.log('selected', user);
     return user;
   });
 
   const collections = { read: 'user', write: 'user' };
-  console.log('transaction', collections, userBody);
   return db.transaction(collections, action, userBody);
 }
 

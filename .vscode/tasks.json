@@ -29,6 +29,22 @@
       "args": ["run", "build-watch"]
     },
     {
+      "taskName": "npm run clean",
+      "args": ["run", "clean"]
+    },
+    {
+      "taskName": "npm run db:create",
+      "args": ["run", "db:create"]
+    },
+    {
+      "taskName": "npm run db:drop",
+      "args": ["run", "db:drop"]
+    },
+    {
+      "taskName": "npm run db:recreate",
+      "args": ["run", "db:recreate"]
+    },
+    {
       "taskName": "npm run dev (build-watch & test-watch)",
       "args": ["run", "dev"],
       "isBackground": true

@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Este script cria o banco de dados no ArangoDB. Documentação do modelo de dados disponível em:
+ * https://github.com/andregs/representativo/blob/master/doc/modelo-dados.md
+ */
+
 const config = require('../app-config');
 const arangojs = require('arangojs');
 
@@ -9,13 +14,13 @@ const db = arangojs({
   url: `http://root:${rootpasswd}@${host}:${port}`
 });
 
-// data from http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais
+// dados obtidos em http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais
 const states = require('./states.json');
 const cities = require('./cities.json');
 const parties = require('./parties.json');
 
 db.createDatabase("repres", [{ username, passwd: password }])
-  .then(info => {
+  .then(() => {
     db.useDatabase("repres");
     return db.graph('userGraph')
       .create({
@@ -36,7 +41,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       })
   )
   .then(
-    doc => db.graph('qaGraph')
+    () => db.graph('qaGraph')
       .create({
         edgeDefinitions: [
           { from: ["user"], collection: "answer", to: ["question"] },
@@ -45,7 +50,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       })
   )
   .then(
-    graph => db.graph('socialGraph')
+    () => db.graph('socialGraph')
       .create({
         edgeDefinitions: [
           { from: ["user"], collection: "follow", to: ["user"] },
@@ -53,7 +58,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       })
   )
   .then(
-    graph => db.graph('worldGraph')
+    () => db.graph('worldGraph')
       .create({
         edgeDefinitions: [
           { from: ["location"], collection: "include", to: ["location"] },
@@ -66,17 +71,17 @@ db.createDatabase("repres", [{ username, passwd: password }])
       .save({ _key: 'BR', name: 'Brasil' })
   )
   .then(
-    doc => db.graph('worldGraph')
+    () => db.graph('worldGraph')
       .vertexCollection('location')
       .import(states)
   )
-  .then(res => {
+  .then(() => {
     const vertexes = states.map(s => ({ _from: `location/BR`, _to: `location/${s._key}` }));
     return db.graph('worldGraph')
       .edgeCollection('include')
       .import(vertexes);
   })
-  .then(res => {
+  .then(() => {
     let cityId = 1;
 
     const promises = states.map(state => {
@@ -87,7 +92,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       return db.graph('worldGraph')
         .vertexCollection('location')
         .import(citiesOfState, { details: true })
-        .then(res2 => {
+        .then(() => {
           const edges = citiesOfState.map(
             city => ({ _from: `location/${state._key}`, _to: `location/${city._key}` })
           );
@@ -100,7 +105,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
     return Promise.all(promises);
   })
   .then(
-    res => db.graph('partyGraph')
+    () => db.graph('partyGraph')
       .create({
         edgeDefinitions: [
           { from: ["party"], collection: "member", to: ["user"] },
@@ -109,7 +114,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       })
   )
   .then(graph => db.graph(graph.name).vertexCollection('party').import(parties))
-  .then(res => {
+  .then(() => {
     const members = parties.map(
       p => ({ _from: `party/${p._key}`, _to: `user/admin`, admin: true })
     );

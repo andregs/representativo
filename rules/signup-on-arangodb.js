@@ -30,9 +30,9 @@ export function signupOnArango(user, context, callback) {
     body: body,
     json: true
   };
-  
+
   console.log('the request', options);
-  
+
   request(options)
     .then(function (parsedBody) {
       console.log('the response', parsedBody);
@@ -52,5 +52,4 @@ export function signupOnArango(user, context, callback) {
       console.log('err on request', err.message);
       callback(err);
     });
-
 }

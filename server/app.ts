@@ -3,6 +3,8 @@ import { Request, Response, static as _static } from 'express';
 import { join } from 'path';
 import { Server } from 'http';
 import { json } from 'body-parser';
+import signupEndpoint from './user/signup/signup.endpoint';
+import { Database } from 'arangojs';
 
 export class RepresentativoServer {
 
@@ -11,7 +13,7 @@ export class RepresentativoServer {
 
   server: Server;
 
-  constructor() {
+  constructor(db: Database, config: any) {
     this.express.use(json());
 
     this.express.use(_static(join(__dirname, '..', 'dist', 'public')));
@@ -22,6 +24,8 @@ export class RepresentativoServer {
         (req, res) => res.sendFile(__dirname + '/public/index.html')
       )
     );
+
+    signupEndpoint(this.express, db);
   }
 
   listen() {

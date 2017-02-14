@@ -1,0 +1,19 @@
+// Crie um arquivo 'app-config.json' baseado neste template.
+{
+  "arangodb": {
+    "rootpasswd": "",
+    "host": "localhost",
+    "port": "8529",
+    // este usuário será criado junto com o banco de dados
+    "username": "repr",
+    "password": "repr"
+  },
+
+  // Preencha os campos abaixo. Para ajuda, visite: https://manage.auth0.com/#/clients
+  "auth0": {
+    "domain": null,
+    "client_id": null,
+    "secret": null,
+    "testUserId": null // um usuário válido para testes de integração, ex.: 'auth0|123abc...'
+  }
+}

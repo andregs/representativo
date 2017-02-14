@@ -1,0 +1,15 @@
+{
+  "arangodb": {
+    "rootpasswd": "root",
+    "host": "localhost",
+    "port": "8529",
+    "username": "andre",
+    "password": "dahoraavida"
+  },
+  "auth0": {
+    "domain": "andregs.auth0.com",
+    "client_id": null,
+    "secret": null,
+    "testUserId": null
+  }
+}

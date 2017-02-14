@@ -7,6 +7,10 @@
   "angular-cli": {},
   "scripts": {
     "reinit": "ng init -sd client --style scss --routing true",
+    "postinstall": "npm run db:create",
+    "db:create": "node script/create-db.script.js",
+    "db:drop": "node script/drop-db.script.js",
+    "db:recreate": "run-s db:drop db:create",
     "prestart": "npm run build",
     "start": "node dist/server.js",
     "nodemon": "nodemon -w dist -i dist/public --inspect",
@@ -50,6 +54,7 @@
     "@angular/platform-browser": "2.4.7",
     "@angular/platform-browser-dynamic": "2.4.7",
     "@angular/router": "3.4.7",
+    "arangojs": "5.6.0",
     "body-parser": "1.16.1",
     "core-js": "2.4.1",
     "express": "4.14.1",

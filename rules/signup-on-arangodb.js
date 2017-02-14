@@ -2,7 +2,7 @@
  * Esta rule garante que, no primeiro login, o novo usuário será criado também no nosso ArangoDB.
  * Ela é executada em cada login bem sucedido, por isso no início checa se o usuário já foi processado.
  */
-export function signupOnArango(user, context, callback) {
+function signupOnArango(user, context, callback) {
   user.app_metadata = user.app_metadata || {};
   if (user.app_metadata.signedUp || context.connection !== 'RE-Users') {
     console.log('ignoring rule for user', user.user_id, 'connection', context.connection);

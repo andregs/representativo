@@ -13,5 +13,6 @@
   "tsimporter.filesToExclude": [
     "./coverage/**",
     "./dist/**"
-  ]
+  ],
+  "eslint.enable": true
 }

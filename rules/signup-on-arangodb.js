@@ -52,5 +52,4 @@ function signupOnArango(user, context, callback) {
       console.log('err on request', err.message);
       callback(err);
     });
-
 }

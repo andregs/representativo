@@ -7,7 +7,6 @@
   "angular-cli": {},
   "scripts": {
     "reinit": "ng init -sd client --style scss --routing true",
-    "postinstall": "npm run db:create",
     "db:create": "node script/create-db.script.js",
     "db:drop": "node script/drop-db.script.js",
     "db:recreate": "run-s db:drop db:create",

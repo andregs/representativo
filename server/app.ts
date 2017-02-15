@@ -33,6 +33,7 @@ export class RepresentativoServer {
     const port = 3000;
     this.server = this.express.listen(port, () => {
       const host = this.server.address().address;
+      // tslint:disable-next-line:no-console
       console.log(`Servidor Express ouvindo em ${host}:${port}`);
     });
   }

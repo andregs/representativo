@@ -1,19 +1,29 @@
 import signup from './signup.model';
 import { Database } from 'arangojs';
+import User from '../user';
 
 describe('Signup Model', function () {
 
-  it('should save a user', function (done) {
-    expect(true).toBeTruthy();
+  let user = new User('huvs');
+  user.email = 'huvs@example.com';
 
-    const user = {
-      _key: 'huvs',
-      name: 'nivs'
-    };
-
+  it('should save a new user on DB', function (done) {
     signup(user, this.db)
       .then(savedUser => {
-        console.log('user >>>>', user, savedUser._id, savedUser.auth0Id);
+        expect(savedUser).toEqual(jasmine.objectContaining(user));
+        expect(savedUser._rev).toBeTruthy();
+        user = savedUser;
+        done();
+      })
+      .catch(done.fail);
+  });
+
+  it('should update an existing user on DB', function (done) {
+    signup(user, this.db)
+      .then(savedUser => {
+        expect(savedUser._key).toEqual(user._key);
+        expect(savedUser._rev).not.toEqual(user._rev);
+        expect(savedUser._rev).toBeTruthy();
         done();
       })
       .catch(done.fail);

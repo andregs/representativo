@@ -12,7 +12,8 @@
     "typeRoots": [
       "../node_modules/@types"
     ],
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "strictNullChecks": true
   },
   "exclude": [
     "**/*.spec.ts"

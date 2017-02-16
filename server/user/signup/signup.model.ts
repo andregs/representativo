@@ -1,11 +1,10 @@
 import { Database } from 'arangojs';
+import User from '../user';
 
 /**
  * Cadastra um novo usuário no app.
- *
- * TODO cerialize no userBody?
  */
-function signup(userBody: any, db: Database) {
+function signup(newUser: User, db: Database): Promise<User> {
   const action = String(function (params) {
     const gm = require("@arangodb/general-graph");
     const graph = gm._graph('userGraph');
@@ -21,14 +20,13 @@ function signup(userBody: any, db: Database) {
       // mas, em casos como o do usuário `admin`, o registro já existe no BD antes do Auth0
       user = graph.user.update(userData._key, userData);
     }
-    user = Object.assign(userData, user);
 
     user = graph.user.firstExample({ _key: user._key });
     return user;
   });
 
   const collections = { read: 'user', write: 'user' };
-  return db.transaction(collections, action, userBody);
+  return db.transaction(collections, action, newUser);
 }
 
 export default signup;

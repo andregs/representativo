@@ -6,7 +6,7 @@ import { json } from 'body-parser';
 import signupEndpoint from './user/signup/signup.endpoint';
 import { Database } from 'arangojs';
 
-export class RepresentativoServer {
+export class RepresentativoApp {
 
   private express = express();
   private routes = [];

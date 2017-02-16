@@ -1,11 +1,9 @@
-import { Database } from 'arangojs';
-import { RepresentativoServer } from './app';
+import { RepresentativoApp } from './app';
+import createDatabase from './db';
 
 const config = require('../app-config');
-const username = config.arangodb.username;
-const password = config.arangodb.password;
-const url = `http://${username}:${password}@localhost:8529`;
-const db = new Database({ url, databaseName: 'repres' });
 
-const server = new RepresentativoServer(db, config);
-server.listen();
+const db = createDatabase(config);
+const app = new RepresentativoApp(db, config);
+
+app.listen();

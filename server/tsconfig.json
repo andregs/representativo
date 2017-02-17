@@ -16,6 +16,7 @@
     "strictNullChecks": true
   },
   "exclude": [
+    "helpers",
     "**/*.spec.ts"
   ]
 }

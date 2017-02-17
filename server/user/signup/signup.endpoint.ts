@@ -16,12 +16,13 @@ import { sendError } from '../../shared/functions';
 function signupEndpoint(express: Express, db: Database) {
 
   express.route('/api/user/signup')
-    .post((req: Request, res: Response) => {
-      signup(req.body, db)
-        .then(results => {
-          return results ? res.json(results) : res.sendStatus(500);
-        })
-        .catch(err => sendError(err, res));
+    .post(async (req: Request, res: Response) => {
+      try {
+        const results = await signup(req.body, db);
+        return results ? res.json(results) : res.sendStatus(500);
+      } catch (err) {
+        sendError(err, res);
+      }
     });
 
 }

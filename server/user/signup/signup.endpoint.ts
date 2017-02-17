@@ -18,8 +18,8 @@ function signupEndpoint(express: Express, db: Database) {
   express.route('/api/user/signup')
     .post(async (req: Request, res: Response) => {
       try {
-        const results = await signup(req.body, db);
-        return results ? res.json(results) : res.sendStatus(500);
+        const newUser = await signup(req.body, db);
+        return res.json(newUser);
       } catch (err) {
         sendError(err, res);
       }

@@ -1,12 +1,15 @@
+import * as express from 'express';
+import { json } from 'body-parser';
 import createDatabase from '../db';
 import { Database } from 'arangojs';
 
 const config = require('../../app-config');
-
 const db = createDatabase(config);
 
 beforeEach(function () {
-  this.db = db;
+  this.testDB = db;
+  this.express = express();
+  this.express.use(json());
 });
 
 afterAll(function (done) {

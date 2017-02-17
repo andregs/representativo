@@ -9,7 +9,7 @@ describe('Signup Model', function () {
 
   it('should save a new user on DB', async function (done) {
     try {
-      const savedUser = await signup(user, this.db);
+      const savedUser = await signup(user, this.testDB);
       expect(savedUser).toEqual(jasmine.objectContaining(user));
       expect(savedUser._rev).toBeTruthy();
       user = savedUser;
@@ -21,7 +21,7 @@ describe('Signup Model', function () {
 
   it('should update an existing user on DB', async function (done) {
     try {
-      const savedUser = await signup(user, this.db);
+      const savedUser = await signup(user, this.testDB);
       expect(savedUser._key).toEqual(user._key);
       expect(savedUser._rev).not.toEqual(user._rev);
       expect(savedUser._rev).toBeTruthy();

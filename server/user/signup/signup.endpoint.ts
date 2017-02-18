@@ -15,10 +15,18 @@ import { sendError } from '../../shared/functions';
  */
 function signupEndpoint(express: Express, db: Database) {
 
-  express.route('/api/user/signup')
+  const base = '/api/user';
+
+  express.route(`${base}/signup`)
     .post(async (req: Request, res: Response) => {
       try {
         const newUser = await signup(req.body, db);
+        if (newUser.createdAt < newUser.updatedAt) {
+          res.status(200);
+        } else {
+          res.status(201);
+          res.set('Location', `${base}/${newUser._key}`);
+        }
         return res.json(newUser);
       } catch (err) {
         sendError(err, res);

@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { json } from 'body-parser';
 import createDatabase from '../db';
-import { Database } from 'arangojs';
 
 const config = require('../../app-config');
 const db = createDatabase(config);

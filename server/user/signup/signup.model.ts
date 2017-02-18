@@ -5,7 +5,7 @@ import User from '../user';
  * Cadastra um novo usuário no app.
  */
 function signup(newUser: User, db: Database): Promise<User> {
-  const action = String(function (params) {
+  const action = String(function (params: any) {
     const gm = require("@arangodb/general-graph");
     const graph = gm._graph('userGraph');
     const _ = require('underscore');

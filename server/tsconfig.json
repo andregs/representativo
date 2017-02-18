@@ -13,7 +13,8 @@
       "../node_modules/@types"
     ],
     "alwaysStrict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "pretty": true
   },
   "exclude": [
     "helpers",

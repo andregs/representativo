@@ -1,8 +1,16 @@
 import { Response } from 'express';
 
-export function sendError(error, response: Response) {
-  const {code = 500, errorNum, message = error, name} = error;
+interface KnownError {
+  name: string;
+  statusCode?: number;
+  message: string;
+};
+
+export function sendError(error: KnownError, response: Response) {
   response
-    .status(code)
-    .json({ errorNum, message, name });
+    .status(error.statusCode || 500)
+    .json({
+      name: error.name,
+      message: error.message
+    });
 }

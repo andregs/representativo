@@ -47,7 +47,8 @@
     {
       "taskName": "npm run dev (build-watch & test-watch)",
       "args": ["run", "dev"],
-      "isBackground": true
+      "isBackground": true,
+      "problemMatcher": ["$tsc-watch"]
     },
     {
       "taskName": "npm run e2e",

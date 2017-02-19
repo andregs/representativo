@@ -27,9 +27,9 @@ function signupOnArango(user, context, callback) {
 
   var options = {
     method: 'POST',
-    uri: `${configuration.APP_URL}/api/user/signup`,
+    uri: configuration.APP_URL + '/api/user/signup',
     headers: {
-      Authorization: `Bearer ${user.idToken}`
+      Authorization: 'Bearer ' + user.idToken
     },
     body: body,
     json: true

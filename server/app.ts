@@ -1,10 +1,11 @@
 import * as express from 'express';
-import { Request, Response, static as _static } from 'express';
+import { static as _static } from 'express';
 import { join } from 'path';
 import { Server } from 'http';
 import { json } from 'body-parser';
 import signupEndpoint from './user/signup/signup.endpoint';
 import { Database } from 'arangojs';
+import jwtChecker from './user/jwt-checker.handler';
 
 export class RepresentativoApp {
 
@@ -25,6 +26,7 @@ export class RepresentativoApp {
       )
     );
 
+    jwtChecker(this.express);
     signupEndpoint(this.express, db);
   }
 

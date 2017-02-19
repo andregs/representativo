@@ -2,6 +2,7 @@
  * Esta rule garante que, no primeiro login, o novo usuário será criado também no nosso ArangoDB.
  * Ela é executada em cada login bem sucedido, por isso no início checa se o usuário já foi processado.
  */
+// eslint-disable-next-line no-unused-vars
 function signupOnArango(user, context, callback) {
   user.app_metadata = user.app_metadata || {};
   if (user.app_metadata.signedUp || context.connection !== 'RE-Users') {

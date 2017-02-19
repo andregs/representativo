@@ -28,7 +28,7 @@ function signupOnArango(user, context, callback) {
 
   var options = {
     method: 'POST',
-    uri: 'https://representativo.localtunnel.me/api/user/signup',
+    uri: `${configuration.APP_URL}/api/user/signup`,
     body: body,
     json: true
   };

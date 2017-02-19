@@ -5,9 +5,7 @@
 function createToken(user, context, callback) {
 
   var api_user = {
-    user_id: user.user_id,
-    name: user.username,
-    email: user.email
+    username: user.username
   };
 
   var options = {

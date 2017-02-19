@@ -16,6 +16,7 @@ function signupOnArango(user, context, callback) {
   var body = {
     _key: user.username,
     auth0Id: user.user_id,
+    idToken: user.idToken,
     email: user.email,
     name: user.name,
     emailVerified: user.email_verified,

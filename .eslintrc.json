@@ -10,7 +10,9 @@
     "jasmine": true
   },
   "globals": {
-    "auth0": false
+    "auth0": false,
+    "configuration": false,
+    "jwt": false
   },
   "rules": {
     "no-console": "off"

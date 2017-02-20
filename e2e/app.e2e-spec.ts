@@ -9,6 +9,6 @@ describe('representativo App', function() {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('re works!');
+    expect(page.getParagraphText()).toEqual('Representativo');
   });
 });

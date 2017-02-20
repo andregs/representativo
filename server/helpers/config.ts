@@ -13,7 +13,7 @@ beforeAll(function () {
     subject: config.auth0.testUser.id,
     expiresIn: 5,
     audience: config.auth0.clientId,
-    issuer: config.auth0.domain
+    issuer: `https://${config.auth0.domain}`
   };
   this.bearerToken = `Bearer ${jwt.sign(
     { username: config.auth0.testUser.username },

@@ -12,7 +12,7 @@ function jwtChecker(express: Express) {
     jwt({
       secret: new Buffer(config.auth0.secret, 'base64'),
       audience: config.auth0.clientId,
-      issuer: config.auth0.domain
+      issuer: `https://${config.auth0.domain}`
     })
   );
 }

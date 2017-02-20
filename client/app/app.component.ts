@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 're-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 're works!';
+  title = 'Representativo';
+  private readonly auth: AuthService;
+
+  constructor(auth: AuthService) {
+    this.auth = auth;
+  }
 }

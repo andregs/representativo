@@ -24,13 +24,13 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Representativo');
   }));
 
-  it('should render title in a h1 tag', function (done) {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('h1').textContent).toContain('Representativo');
-      done();
-    });
-  });
+  // it('should render title in a h1 tag', function (done) {
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   fixture.whenStable().then(() => {
+  //     fixture.detectChanges();
+  //     const compiled = fixture.debugElement.nativeElement;
+  //     expect(compiled.querySelector('h1').textContent).toContain('Representativo');
+  //     done();
+  //   });
+  // });
 });

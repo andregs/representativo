@@ -1,5 +1,5 @@
-<h1>{{ title }}</h1>
 <main>
+  <re-toolbar></re-toolbar>
   <re-login [hidden]="auth.authenticated()"></re-login>
   <router-outlet *ngIf="auth.authenticated()"></router-outlet>
 </main>

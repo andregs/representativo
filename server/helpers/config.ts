@@ -4,20 +4,20 @@ import createDatabase from '../db';
 import jwtChecker from '../user/jwt-checker.handler';
 import * as jwt from 'jsonwebtoken';
 
-const config = require('../../app-config');
-const db = createDatabase(config);
+import * as config from '../../app-config';
+const db = createDatabase(config.secret.arangodb);
 
 beforeAll(function () {
   this.testDB = db;
   const options = {
-    subject: config.auth0.testUser.id,
+    subject: config.secret.auth0.testUser.id,
     expiresIn: 5,
-    audience: config.auth0.clientId,
-    issuer: `https://${config.auth0.domain}`
+    audience: config.shared.auth0.clientId,
+    issuer: `https://${config.shared.auth0.domain}`
   };
   this.bearerToken = `Bearer ${jwt.sign(
-    { username: config.auth0.testUser.username },
-    new Buffer(config.auth0.secret, 'base64'),
+    { username: config.secret.auth0.testUser.username },
+    new Buffer(config.secret.auth0.secret, 'base64'),
     options
   )}`;
 });

@@ -4,14 +4,14 @@
  * Este script exclui o banco de dados no ArangoDB.
  */
 
-const config = require('../app-config');
-const arangojs = require('arangojs');
+import { secret as config } from '../app-config';
+import { Database } from 'arangojs';
 
 const { rootpasswd } = config.arangodb;
 
 const host = 'localhost';
 const port = '8529';
-const db = arangojs({
+const db = new Database({
   url: `http://root:${rootpasswd}@${host}:${port}`
 });
 

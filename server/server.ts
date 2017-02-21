@@ -1,9 +1,9 @@
 import { RepresentativoApp } from './app';
 import createDatabase from './db';
 
-const config = require('../app-config');
+import { secret as config } from '../app-config';
 
-const db = createDatabase(config);
+const db = createDatabase(config.arangodb);
 const app = new RepresentativoApp(db, config);
 
 app.listen();

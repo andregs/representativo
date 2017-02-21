@@ -7,11 +7,11 @@
   "angular-cli": {},
   "scripts": {
     "reinit": "ng init -p re -sd client --style scss --routing true",
-    "db:create": "node script/create-db.script.js",
-    "db:drop": "node script/drop-db.script.js",
+    "db:create": "ts-node -P server script/create-db.script.ts",
+    "db:drop": "ts-node -P server script/drop-db.script.ts",
     "db:recreate": "run-s db:drop db:create",
     "prestart": "npm run build",
-    "start": "node dist/server.js",
+    "start": "node dist/server/server.js",
     "nodemon": "nodemon -w dist -i dist/public --inspect",
     "dev": "npm-run-all clean -p build-watch test-watch",
     "tunnel": "lt --port 3000",
@@ -31,7 +31,7 @@
     "e2e": "protractor"
   },
   "private": true,
-  "main": "dist/server.js",
+  "main": "dist/server/server.js",
   "homepage": "https://github.com/andregs/representativo#readme",
   "repository": {
     "type": "git",
@@ -50,6 +50,7 @@
     "@angular/core": "2.4.8",
     "@angular/forms": "2.4.8",
     "@angular/http": "2.4.8",
+    "@angular/material": "git+https://github.com/angular/material2-builds.git",
     "@angular/platform-browser": "2.4.8",
     "@angular/platform-browser-dynamic": "2.4.8",
     "@angular/router": "3.4.8",
@@ -60,6 +61,7 @@
     "core-js": "2.4.1",
     "express": "4.14.1",
     "express-jwt": "5.1.0",
+    "hammerjs": "2.0.8",
     "rxjs": "5.1.1",
     "ts-helpers": "1.1.2",
     "zone.js": "0.7.7"
@@ -69,6 +71,7 @@
     "@types/body-parser": "0.0.34",
     "@types/express": "4.0.35",
     "@types/express-jwt": "0.0.34",
+    "@types/hammerjs": "2.0.34",
     "@types/jasmine": "2.5.43",
     "@types/jsonwebtoken": "7.2.0",
     "@types/node": "7.0.5",

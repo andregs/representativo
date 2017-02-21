@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
 
-const config = require('../../../app-config.json');
+import { shared as config } from '../../../app-config';
 
 @Injectable()
 export class AuthService {

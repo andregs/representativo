@@ -17,7 +17,7 @@ export class RepresentativoApp {
   constructor(db: Database, config: any) {
     this.express.use(json());
 
-    this.express.use(_static(join(__dirname, '..', 'dist', 'public')));
+    this.express.use(_static(join(__dirname, '..', 'public')));
 
     this.routes.forEach(
       route => this.express.get(

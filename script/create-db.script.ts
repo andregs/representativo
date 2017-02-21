@@ -5,12 +5,12 @@
  * https://github.com/andregs/representativo/blob/master/doc/modelo-dados.md
  */
 
-const config = require('../app-config');
-const arangojs = require('arangojs');
+import { secret as config } from '../app-config';
+import { Database } from 'arangojs';
 
 const { rootpasswd, host, port, username, password } = config.arangodb;
 
-const db = arangojs({
+const db = new Database({
   url: `http://root:${rootpasswd}@${host}:${port}`
 });
 

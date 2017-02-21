@@ -1,5 +1,6 @@
+<re-toolbar></re-toolbar>
 <main>
-  <re-toolbar></re-toolbar>
-  <re-login [hidden]="auth.authenticated()"></re-login>
-  <router-outlet *ngIf="auth.authenticated()"></router-outlet>
+  <!--<re-login [hidden]="auth.authenticated"></re-login>-->
+  <re-login></re-login>
+  <router-outlet *ngIf="auth.authenticated"></router-outlet>
 </main>

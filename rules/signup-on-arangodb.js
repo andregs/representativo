@@ -35,6 +35,9 @@ function signupOnArango(user, context, callback) {
     json: true
   };
 
+  // limpa o token p/ que ele não seja enviado aos browsers no perfil do usuário
+  user.idToken = undefined;
+
   console.log('the request', options);
 
   request(options)

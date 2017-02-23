@@ -18,6 +18,7 @@
   },
   "exclude": [
     "helpers",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "dev-server.ts"
   ]
 }

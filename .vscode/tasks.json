@@ -48,20 +48,22 @@
       "taskName": "npm run dev (build-watch & test-watch)",
       "args": ["run", "dev"],
       "isBackground": true,
-      "problemMatcher": ["$tsc-watch"]
+      "problemMatcher": [
+        "$tsc-watch"
+      ]
     },
     {
       "taskName": "npm run e2e",
       "args": ["run", "e2e"]
     },
     {
-      "taskName": "npm run nodemon (inicia um server de desenvolvimento)",
-      "args": ["run", "nodemon"],
+      "taskName": "npm run start (inicia um server padrão)",
+      "args": ["run", "start"],
       "isBackground": true
     },
     {
-      "taskName": "npm run start (inicia um server padrão)",
-      "args": ["run", "start"],
+      "taskName": "npm run start-dev (inicia um server de desenvolvimento)",
+      "args": ["run", "start-dev"],
       "isBackground": true
     },
     {
@@ -72,11 +74,6 @@
     {
       "taskName": "npm run test-watch",
       "args": ["run", "test-watch"],
-      "isBackground": true
-    },
-    {
-      "taskName": "npm run tunnel (gera uma URL pública para o app)",
-      "args": ["run", "tunnel"],
       "isBackground": true
     }
   ]

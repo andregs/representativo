@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.displayLoginForm();
+    this.auth.displayLoginForm('login');
   }
 
 }

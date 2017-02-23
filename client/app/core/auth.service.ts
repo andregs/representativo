@@ -9,69 +9,90 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { shared as config } from '../../../app-config';
 import User from '../../../server/user/user';
 
+/**
+ * Gerencia o login & logout no Auth0 e disponibiliza o usuário autenticado.
+ */
 @Injectable()
 export class AuthService {
 
   private readonly userSource = new ReplaySubject<User>(1);
 
   constructor() {
+    this.protectStorage();
+  }
+
+  /**
+   * Emite o usuário caso ele já esteja autenticado (localStorage) ao carregar o app.
+   */
+  tryAutomaticLogin() {
     if (this.authenticated) {
-      this.emitAuthenticatedUser(
+      this.emitUser(
         this.createLock(),
-        localStorage.getItem('accessToken')
+        localStorage.getItem('accessToken'),
+        localStorage.getItem('id_token')
       );
     }
   }
 
-  displayLoginForm(redirectUrl?: string): void {
-    const lock = this.createLock(redirectUrl);
+  /**
+   * Cria e exibe o componente do Auth0 para login e cadastro.
+   */
+  displayLoginForm(container?: string, redirectUrl?: string): void {
+    const lock = this.createLock(container, redirectUrl);
     lock.on("authenticated", res => this.onAuthenticated(lock, res));
     lock.on("unrecoverable_error", e => this.onError(lock, e));
     lock.on("authorization_error", e => this.onError(lock, e));
     lock.show();
   }
 
+  /**
+   * O usuário autenticado no sistema.
+   */
   get user(): Observable<User> {
     return this.userSource.asObservable();
   }
 
+  /**
+   * Informa se o usuário está autenticado.
+   */
   get authenticated(): boolean {
-    return tokenNotExpired(); // is there 'id_token' in localStorage?
+    // is there a non-expired 'id_token' in localStorage?
+    return tokenNotExpired();
   }
 
+  /**
+   * Mata a sessão do usuário atual.
+   */
   logout(): void {
-    console.log('bye!');
-    localStorage.removeItem('id_token');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('id_token');
   }
 
-  private createLock(redirectUrl?: string): any {
-    const auth: any = { responseType: 'token' };
-    if (redirectUrl) {
-      auth.redirectUrl = redirectUrl;
-    };
+  /**
+   * Cria uma instância do {@link Auth0Lock} com as opções informadas.
+   * Referência: {@link https://auth0.com/docs/libraries/lock/v10/customization}
+   */
+  createLock(container?: string, redirectUrl?: string): any {
+    const auth = { responseType: 'token' } as any;
+    const options = { language: 'pt-br', auth } as any;
 
-    return new Auth0Lock(
-      config.auth0.clientId,
-      config.auth0.domain, {
-        container: 'login',
-        language: 'pt-br',
-        auth
-      });
+    if (redirectUrl) auth.redirectUrl = redirectUrl;
+    if (container) options.container = container;
+
+    return new Auth0Lock(config.auth0.clientId, config.auth0.domain, options);
   }
 
-  private emitAuthenticatedUser(lock, accessToken?: string, idToken?: string): void {
+  /**
+   * Busca o perfil do usuário autenticado e notifica os assinantes de {@link AuthService#user}.
+   */
+  private emitUser(lock, accessToken: string, idToken: string): void {
     const getUserInfoRx: (id: string) => Observable<any>
       = bindNodeCallback(lock.getUserInfo.bind(lock));
 
-    getUserInfoRx(accessToken)
-    // .do(() => { throw new Error('boom!'); })
-    .subscribe(
+    getUserInfoRx(accessToken).subscribe(
       profile => {
-        console.log('got auth0 profile', profile);
         DeserializeKeysFrom(User.keyTransformer);
         const user: User = Deserialize(profile, User);
-        console.log('got auth0 User', user);
         DeserializeKeysFrom(null);
         this.userSource.next(user);
         lock.hide();
@@ -85,13 +106,28 @@ export class AuthService {
     );
   }
 
-  private onAuthenticated(lock, authResult): void {
-    console.log('autenticamos!', authResult);
-    this.emitAuthenticatedUser(lock, authResult.accessToken, authResult.idToken);
+  /**
+   * Mata a sessão se o usuário alterar os valores da localStorage (ex. via F12).
+   */
+  private protectStorage() {
+    Observable.fromEvent<StorageEvent>(window, 'storage')
+      .filter(event => ['accessToken', 'id_token'].some(
+        key => event.key === key && event.oldValue !== null
+      ))
+      .subscribe(() => this.logout());
   }
 
+  /**
+   * Emite o usuário que acabou de se autenticar no lock.
+   */
+  private onAuthenticated(lock, authResult): void {
+    this.emitUser(lock, authResult.accessToken, authResult.idToken);
+  }
+
+  /**
+   * Exibe uma mensagem de erro no lock.
+   */
   private onError(lock, error): void {
-    console.log('oops!', error);
     lock.hide();
     lock.show({
       flashMessage: {

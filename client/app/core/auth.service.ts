@@ -37,8 +37,8 @@ export class AuthService {
   /**
    * Cria e exibe o componente do Auth0 para login e cadastro.
    */
-  displayLoginForm(container?: string, redirectUrl?: string): void {
-    const lock = this.createLock(container, redirectUrl);
+  displayLoginForm(container?: string, redirect = true, remember = true): void {
+    const lock = this.createLock(container, redirect, remember);
     lock.on("authenticated", res => this.onAuthenticated(lock, res));
     lock.on("unrecoverable_error", e => this.onError(lock, e));
     lock.on("authorization_error", e => this.onError(lock, e));
@@ -72,11 +72,10 @@ export class AuthService {
    * Cria uma instância do {@link Auth0Lock} com as opções informadas.
    * Referência: {@link https://auth0.com/docs/libraries/lock/v10/customization}
    */
-  createLock(container?: string, redirectUrl?: string): any {
-    const auth = { responseType: 'token' } as any;
-    const options = { language: 'pt-br', auth } as any;
+  createLock(container?: string, redirect = true, rememberLastLogin = true): any {
+    const auth = { responseType: 'token', redirect } as any;
+    const options = { language: 'pt-br', auth, rememberLastLogin } as any;
 
-    if (redirectUrl) auth.redirectUrl = redirectUrl;
     if (container) options.container = container;
 
     return new Auth0Lock(config.auth0.clientId, config.auth0.domain, options);
@@ -94,10 +93,9 @@ export class AuthService {
         DeserializeKeysFrom(User.keyTransformer);
         const user: User = Deserialize(profile, User);
         DeserializeKeysFrom(null);
-        this.userSource.next(user);
-        lock.hide();
         localStorage.setItem('id_token', idToken);
         localStorage.setItem('accessToken', accessToken);
+        this.userSource.next(user);
       },
       (error: Error) => {
         this.logout();

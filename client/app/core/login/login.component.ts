@@ -8,6 +8,9 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  auth0Redirect = true;
+  auth0Remember = true;
+
   private readonly auth: AuthService;
 
   constructor(auth: AuthService) {
@@ -15,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.displayLoginForm('login');
+    this.auth.displayLoginForm('login', this.auth0Redirect, this.auth0Remember);
   }
 
 }

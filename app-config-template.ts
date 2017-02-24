@@ -18,8 +18,8 @@ export const secret = {
     // Um usuário válido para testes de integração.
     // Ele precisa existir no BD do Auth0.
     testUser: {
-      id: null, // ex.: 'auth0|blabla...',
-      username: null, // ex.: 'admin'
+      username: null,
+      password: null
     }
   },
 

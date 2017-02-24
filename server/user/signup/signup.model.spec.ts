@@ -11,7 +11,7 @@ describe('Signup Model', function () {
   it('should save a new user on DB', async function (done) {
     try {
       const savedUser = await signup(this.user, this.testDB);
-      expect(savedUser).toEqual(jasmine.objectContaining(this.user));
+      expect(savedUser._key).toEqual(this.user._key);
       expect(savedUser._rev).toBeTruthy();
       this.user = savedUser;
       done();

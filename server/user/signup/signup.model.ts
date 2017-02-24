@@ -21,7 +21,6 @@ function signup(newUser: User, db: Database): Promise<User> {
       user = graph.user.update(userData._key, userData);
     }
 
-    user = graph.user.firstExample({ _key: user._key });
     return user;
   });
 

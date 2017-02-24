@@ -36,8 +36,7 @@ describe('Signup Endpoint', function () {
       .send(Serialize(this.user, User))
       .expect(201)
       .expect('Location', `${this.base}/${this.user._key}`)
-      .expect('Content-Type', /json/)
-      .expect(Serialize(this.user, User))
+      .expect('Content-Type', /text/)
       .then(done)
       .catch(done.fail);
   });
@@ -49,8 +48,7 @@ describe('Signup Endpoint', function () {
       .set('Authorization', this.bearerToken)
       .send(Serialize(this.user, User))
       .expect(200)
-      .expect('Content-Type', /json/)
-      .expect(Serialize(this.user, User))
+      .expect('Content-Type', /text/)
       .then(done)
       .catch(done.fail);
   });

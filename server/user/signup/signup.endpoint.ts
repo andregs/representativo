@@ -22,12 +22,11 @@ function signupEndpoint(express: Express, db: Database) {
       try {
         const newUser = await signup(req.body, db);
         if (newUser.createdAt < newUser.updatedAt) {
-          res.status(200);
+          res.sendStatus(200);
         } else {
-          res.status(201);
           res.set('Location', `${base}/${newUser._key}`);
+          res.sendStatus(201);
         }
-        return res.json(newUser);
       } catch (err) {
         sendError(err, res);
       }

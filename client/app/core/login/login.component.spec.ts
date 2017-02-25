@@ -6,6 +6,7 @@ import tryUntil from '../../../helper/try-until';
 import setInputValue from '../../../helper/set-input-value';
 import { AuthService } from '../auth.service';
 import { secret as config } from '../../../../app-config';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -14,7 +15,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule]
+      imports: [CoreModule, RouterTestingModule]
     })
       .compileComponents();
   }));
@@ -33,7 +34,7 @@ describe('LoginComponent', () => {
     localStorage.clear();
   });
 
-  it('should create', () => {
+  it('should create LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 

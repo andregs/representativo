@@ -4,6 +4,7 @@ import Auth0Lock from 'auth0-lock';
 import { Deserialize, DeserializeKeysFrom } from 'cerialize';
 import { Observable } from 'rxjs/Observable';
 import { bindNodeCallback } from 'rxjs/Observable/bindNodeCallback';
+import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { shared as config } from '../../../app-config';
@@ -16,6 +17,7 @@ import User from '../../../server/user/user';
 export class AuthService {
 
   private readonly userSource = new ReplaySubject<User>(1);
+  private readonly logoutSource = new Subject<User>();
 
   constructor() {
     this.protectStorage();
@@ -66,6 +68,13 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('id_token');
+    this.user.subscribe(
+      user => this.logoutSource.next(user)
+    );
+  }
+
+  onLogout(): Observable<User> {
+    return this.logoutSource.asObservable();
   }
 
   /**

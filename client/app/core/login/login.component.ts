@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 're-login',
@@ -12,13 +13,18 @@ export class LoginComponent implements OnInit {
   auth0Remember = true;
 
   private readonly auth: AuthService;
+  private readonly router: Router;
 
-  constructor(auth: AuthService) {
+  constructor(auth: AuthService, router: Router) {
     this.auth = auth;
+    this.router = router;
   }
 
   ngOnInit() {
-    this.auth.displayLoginForm('login', this.auth0Redirect, this.auth0Remember);
+    if (!this.auth.authenticated) {
+      this.auth.displayLoginForm('login', this.auth0Redirect, this.auth0Remember);
+    }
+    this.auth.user.subscribe(() => this.router.navigate(['/']));
   }
 
 }

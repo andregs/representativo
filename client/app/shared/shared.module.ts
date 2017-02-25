@@ -1,0 +1,18 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+
+/**
+ * Este módulo fornece componentes compartilhados por vários outros módulos da aplicação.
+ */
+@NgModule({
+  imports: [
+    CommonModule,
+    MaterialModule
+  ],
+  exports: [
+    CommonModule,
+    MaterialModule
+  ]
+})
+export class SharedModule { }

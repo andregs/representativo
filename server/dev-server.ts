@@ -1,3 +1,5 @@
+/* tslint:disable no-console */
+
 import * as nodemon from 'nodemon';
 import * as localtunnel from 'localtunnel';
 

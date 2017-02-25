@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 're-toolbar',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  readonly auth: AuthService;
+  readonly router: Router;
+
+  constructor(auth: AuthService, router: Router) {
+    this.auth = auth;
+    this.router = router;
+  }
 
   ngOnInit() {
+  }
+
+  goToProfile() {
+    this.router.navigate(['perfil']);
   }
 
 }

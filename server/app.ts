@@ -10,11 +10,14 @@ import jwtChecker from './user/jwt-checker.handler';
 export class RepresentativoApp {
 
   private express = express();
-  private routes = [];
+  private routes = [
+    '/login',
+    '/perfil',
+  ];
 
   server: Server;
 
-  constructor(db: Database, config: any) {
+  constructor(db: Database) {
     this.express.use(json());
 
     this.express.use(_static(join(__dirname, '..', 'public')));
@@ -22,7 +25,7 @@ export class RepresentativoApp {
     this.routes.forEach(
       route => this.express.get(
         route,
-        (req, res) => res.sendFile(__dirname + '/public/index.html')
+        (_, res) => res.sendFile(join(__dirname, '..', 'public', 'index.html'))
       )
     );
 

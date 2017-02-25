@@ -2,13 +2,32 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { AuthService } from './core/auth.service';
+import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
+import { Observable } from 'rxjs/Observable';
+
+class MockAuthService {
+  tryAutomaticLogin = jasmine.createSpy('tryAutomaticLogin');
+  displayLoginForm = jasmine.createSpy('displayLoginForm');
+  onLogout() {
+    return Observable.of({});
+  }
+}
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, CoreModule],
+      imports: [RouterTestingModule, CoreModule, SharedModule, UserModule],
       declarations: [AppComponent],
-    });
+    })
+      .overrideModule(CoreModule, {
+        set: {
+          providers: [
+            { provide: AuthService, useClass: MockAuthService },
+          ]
+        }
+      });
     TestBed.compileComponents();
   });
 
@@ -24,13 +43,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Representativo');
   }));
 
-  // it('should render title in a h1 tag', function (done) {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.whenStable().then(() => {
-  //     fixture.detectChanges();
-  //     const compiled = fixture.debugElement.nativeElement;
-  //     expect(compiled.querySelector('h1').textContent).toContain('Representativo');
-  //     done();
-  //   });
-  // });
+  it('should try to log the user automatically', function () {
+    const fixture = TestBed.createComponent(AppComponent);
+    const service = fixture.debugElement.injector.get(AuthService) as AuthService;
+    fixture.detectChanges();
+    expect(service.tryAutomaticLogin).toHaveBeenCalled();
+  });
 });

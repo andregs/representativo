@@ -1,5 +1,11 @@
 <md-toolbar color="primary">
-  <span>App</span>
+  <a [routerLink]="['/']">App</a>
   <span class="flex-fill"></span>
-  <span>Right</span>
+  <button md-icon-button *ngIf="auth.authenticated" (click)="goToProfile()">
+    <md-icon>person</md-icon>
+  </button>
+  <button md-icon-button *ngIf="auth.authenticated" (click)="auth.logout()">
+    <md-icon>power_settings_new</md-icon>
+  </button>
 </md-toolbar>
+

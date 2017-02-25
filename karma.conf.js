@@ -10,7 +10,8 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-nightmare'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma')
+      require('@angular/cli/plugins/karma'),
+      require('karma-mocha-reporter')
     ],
     files: [
       { pattern: './client/test.ts', watched: false }
@@ -25,13 +26,17 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
+    mochaReporter: {
+      maxLogLines: 12,
+      // output: 'autowatch'
+    },
     angularCli: {
       config: './.angular-cli.json',
       environment: 'dev'
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
-      ? ['progress', 'coverage-istanbul']
-      : ['progress'],
+      ? ['mocha', 'coverage-istanbul']
+      : ['mocha'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

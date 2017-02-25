@@ -90,6 +90,7 @@
     "karma-cli": "1.0.1",
     "karma-coverage-istanbul-reporter": "0.2.3",
     "karma-jasmine": "1.1.0",
+    "karma-mocha-reporter": "2.2.2",
     "karma-nightmare": "0.4.2",
     "localtunnel": "1.8.2",
     "nodemon": "1.11.0",

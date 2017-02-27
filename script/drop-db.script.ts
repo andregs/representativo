@@ -6,7 +6,7 @@
 
 import { Database } from 'arangojs';
 
-const host = process.env.ARANGO_HOST || 'localhost';
+const host = process.env.ARANGO_HOST || '127.0.0.1';
 const port = process.env.ARANGO_PORT || '8529';
 const rootpasswd = process.env.ARANGO_ROOTPASSWD || '';
 const db = new Database({

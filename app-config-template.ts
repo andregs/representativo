@@ -24,7 +24,7 @@ export const config = {
 // sobrescrever os valores padrão adotados pela aplicação.
 
 // Credenciais para conectar-se ao banco de dados ArangoDB.
-// ARANGO_HOST=localhost
+// ARANGO_HOST=127.0.0.1
 // ARANGO_PORT=8529
 // ARANGO_ROOTPASSWD=
 

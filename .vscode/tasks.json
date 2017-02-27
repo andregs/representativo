@@ -17,36 +17,36 @@
     },
     {
       "taskName": "npm run build",
-      "args": ["run", "build"],
+      "args": ["run", "-s", "build"],
       "isBuildCommand": true
     },
     {
       "taskName": "npm run build-prod (para ambiente de produção)",
-      "args": ["run", "build-prod"]
+      "args": ["run", "-s", "build-prod"]
     },
     {
       "taskName": "npm run build-watch",
-      "args": ["run", "build-watch"]
+      "args": ["run", "-s", "build-watch"]
     },
     {
       "taskName": "npm run clean",
-      "args": ["run", "clean"]
+      "args": ["run", "-s", "clean"]
     },
     {
       "taskName": "npm run db:create",
-      "args": ["run", "db:create"]
+      "args": ["run", "-s", "db:create"]
     },
     {
       "taskName": "npm run db:drop",
-      "args": ["run", "db:drop"]
+      "args": ["run", "-s", "db:drop"]
     },
     {
       "taskName": "npm run db:recreate",
-      "args": ["run", "db:recreate"]
+      "args": ["run", "-s", "db:recreate"]
     },
     {
       "taskName": "npm run dev (build-watch & test-watch)",
-      "args": ["run", "dev"],
+      "args": ["run", "-s", "dev"],
       "isBackground": true,
       "problemMatcher": [
         "$tsc-watch"
@@ -54,26 +54,26 @@
     },
     {
       "taskName": "npm run e2e",
-      "args": ["run", "e2e"]
+      "args": ["run", "-s", "e2e"]
     },
     {
       "taskName": "npm run start (inicia um server padrão)",
-      "args": ["run", "start"],
+      "args": ["run", "-s", "start"],
       "isBackground": true
     },
     {
       "taskName": "npm run start-dev (inicia um server de desenvolvimento)",
-      "args": ["run", "start-dev"],
+      "args": ["run", "-s", "start-dev"],
       "isBackground": true
     },
     {
       "taskName": "npm run test",
-      "args": ["run", "test"],
+      "args": ["run", "-s", "test"],
       "isTestCommand": true
     },
     {
       "taskName": "npm run test-watch",
-      "args": ["run", "test-watch"],
+      "args": ["run", "-s", "test-watch"],
       "isBackground": true
     }
   ]

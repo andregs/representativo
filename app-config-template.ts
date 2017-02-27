@@ -1,37 +1,33 @@
-// Crie um arquivo 'app-config.ts' baseado neste template.
+// Para compilar a aplicação, você primeiro precisa fazer as seguintes configurações:
 
-// Dados da sua conta no Auth0, disponiveis em:
-// https://manage.auth0.com/#/clients
-export const shared = {
+// Passo 1: Crie um arquivo 'app-config.ts' baseado neste template, cos os seguintes
+// dados da sua conta no Auth0 (disponíveis em https://manage.auth0.com/#/clients)
+
+export const config = {
   auth0: {
-    domain: null,
-    clientId: null,
+    domain: null, // ex.: foo.auth0.com
+    clientId: null, // ex.: Ld479uUf4j9blablabla...
   }
 };
 
-// Estes dados são confidenciais. Nunca importe-os em código dentro de 'client/'
-export const secret = {
-  auth0: {
-    // Também disponível em https://manage.auth0.com/#/clients
-    secret: null,
+// Passo 2: Defina as seguintes variáveis de ambiente no seu sistema operacional:
 
-    // Um usuário válido para testes de integração.
-    // Ele precisa existir no BD do Auth0.
-    testUser: {
-      id: null, // ex.: auth0|58a27blablabla...
-      username: null,
-      password: null
-    }
-  },
+// O secret da sua conta no Auth0, disponível em https://manage.auth0.com/#/clients
+// AUTH0_SECRET
 
-  // Credenciais para conectar-se ao banco de dados ArangoDB.
-  arangodb: {
-    rootpasswd: "",
-    host: "localhost",
-    port: "8529",
+// Um usuário válido para testes de integração. Ele precisa existir no Auth0.
+// TEST_USER_ID=<ex.: auth0|58a27blablabla...>
+// TEST_USERNAME=<ex.: foo>
+// TEST_PASSWORD=<ex.: bar>
 
-    // Este usuário será criado junto com o banco de dados.
-    username: "repr",
-    password: "repr"
-  }
-};
+// Passo 3 (opcional): você pode definir as seguintes variáveis de ambiente para
+// sobrescrever os valores padrão adotados pela aplicação.
+
+// Credenciais para conectar-se ao banco de dados ArangoDB.
+// ARANGO_HOST=localhost
+// ARANGO_PORT=8529
+// ARANGO_ROOTPASSWD=
+
+// Este usuário será criado junto com o banco de dados.
+// DB_USERNAME=repres
+// DB_PASSWORD=repres

@@ -4,20 +4,22 @@ import createDatabase from '../db';
 import jwtChecker from '../user/jwt-checker.handler';
 import * as jwt from 'jsonwebtoken';
 
-import * as config from '../../app-config';
-const db = createDatabase(config.secret.arangodb);
+import { config } from '../../app-config';
+const username = process.env.DB_USERNAME || 'repres';
+const password = process.env.DB_PASSWORD || 'repres';
+const db = createDatabase(username, password);
 
 beforeAll(function () {
   this.testDB = db;
   const options = {
-    subject: config.secret.auth0.testUser.id,
+    subject: process.env.TEST_USER_ID,
     expiresIn: 5,
-    audience: config.shared.auth0.clientId,
-    issuer: `https://${config.shared.auth0.domain}`
+    audience: config.auth0.clientId,
+    issuer: `https://${config.auth0.domain}`
   };
   this.bearerToken = `Bearer ${jwt.sign(
-    { username: config.secret.auth0.testUser.username },
-    new Buffer(config.secret.auth0.secret, 'base64'),
+    { username: process.env.TEST_USERNAME },
+    new Buffer(process.env.AUTH0_SECRET, 'base64'),
     options
   )}`;
 });

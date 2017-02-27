@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginComponent } from './login.component';
 import { CoreModule } from '../core.module';
 import tryUntil from '../../../helper/try-until';
 import setInputValue from '../../../helper/set-input-value';
 import { AuthService } from '../auth.service';
-import { secret as config } from '../../../../app-config';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -52,13 +51,13 @@ describe('LoginComponent', () => {
       })
       .do(el => {
         expect(service.authenticated).toBe(false, 'not logged in yet');
-        setInputValue(el.username, config.auth0.testUser.username);
-        setInputValue(el.password, config.auth0.testUser.password);
+        setInputValue(el.username, process.env.TEST_USERNAME);
+        setInputValue(el.password, process.env.TEST_PASSWORD);
         el.submit.click();
       })
       .flatMap(() => service.user)
       .subscribe(user => {
-        expect(user._key).toBe(config.auth0.testUser.username);
+        expect(user._key).toBe(process.env.TEST_USERNAME);
         expect(user.auth0Id).toBeTruthy('got the auth0Id');
         expect(service.authenticated).toBe(true, "user's authenticated");
         done();

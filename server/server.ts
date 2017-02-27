@@ -1,9 +1,9 @@
 import { RepresentativoApp } from './app';
 import createDatabase from './db';
 
-import { secret as config } from '../app-config';
-
-const db = createDatabase(config.arangodb);
+const username = process.env.DB_USERNAME || 'repres';
+const password = process.env.DB_PASSWORD || 'repres';
+const db = createDatabase(username, password);
 const app = new RepresentativoApp(db);
 
 app.listen();

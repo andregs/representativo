@@ -1,7 +1,6 @@
 import { Database } from 'arangojs';
 
-function createDatabase(config: { username: string, password: string }) {
-  const { username, password } = config;
+function createDatabase(username: string, password: string) {
   const url = `http://${username}:${password}@localhost:8529`;
 
   return new Database({ url, databaseName: 'repres' });

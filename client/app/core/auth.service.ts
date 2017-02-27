@@ -7,7 +7,7 @@ import { bindNodeCallback } from 'rxjs/Observable/bindNodeCallback';
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { shared as config } from '../../../app-config';
+import { config } from '../../../app-config';
 import User from '../../../server/user/user';
 
 /**

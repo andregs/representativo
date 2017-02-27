@@ -5,10 +5,13 @@
  * https://github.com/andregs/representativo/blob/master/doc/modelo-dados.md
  */
 
-import { secret as config } from '../app-config';
 import { Database } from 'arangojs';
 
-const { rootpasswd, host, port, username, password } = config.arangodb;
+const rootpasswd = process.env.ARANGO_ROOTPASSWD || '';
+const host = process.env.ARANGO_HOST || 'localhost';
+const port = process.env.ARANGO_PORT || '8529';
+const username = process.env.DB_USERNAME || 'repres';
+const password = process.env.DB_PASSWORD || 'repres';
 
 const db = new Database({
   url: `http://root:${rootpasswd}@${host}:${port}`
@@ -119,4 +122,7 @@ db.createDatabase("repres", [{ username, passwd: password }])
       p => ({ _from: `party/${p._key}`, _to: `user/admin`, admin: true })
     );
     return db.graph('partyGraph').edgeCollection('member').import(members);
+  })
+  .then(() => {
+    console.log("representativo's db created");
   });

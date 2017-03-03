@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "node"
+before_install:
+  - echo arangodb3 arangodb3/password password root | debconf-set-selections
+  - echo arangodb3 arangodb3/password_again password root | debconf-set-selections
+  - curl -s -L https://www.arangodb.com/repositories/travisCI/setup_arangodb_3.1.12.sh -o setup_arangodb.sh
+  - chmod +x setup_arangodb.sh
+  - ./setup_arangodb.sh

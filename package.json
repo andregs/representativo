@@ -10,7 +10,6 @@
     "db:create": "ts-node -P server script/create-db.script.ts",
     "db:drop": "ts-node -P server script/drop-db.script.ts",
     "db:recreate": "run-s --silent db:drop db:create",
-    "prestart": "npm run -s build",
     "start": "node dist/server/server.js",
     "start-dev": "ts-node server/dev-server.ts",
     "dev": "npm-run-all --silent clean -p build-watch test-watch",

@@ -15,4 +15,4 @@ before_install:
         clientId: $AUTH0_CLIENT_ID
       }
     };
-EOF
+    EOF

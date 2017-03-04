@@ -3,9 +3,9 @@ import { tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
 import { Deserialize, DeserializeKeysFrom } from 'cerialize';
 import { Observable } from 'rxjs/Observable';
-import { bindNodeCallback } from 'rxjs/Observable/bindNodeCallback';
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/observable/bindNodeCallback';
 
 import { config } from '../../../app-config';
 import User from '../../../server/user/user';
@@ -95,7 +95,7 @@ export class AuthService {
    */
   private emitUser(lock, accessToken: string, idToken: string): void {
     const getUserInfoRx: (id: string) => Observable<any>
-      = bindNodeCallback(lock.getUserInfo.bind(lock));
+      = Observable.bindNodeCallback(lock.getUserInfo.bind(lock));
 
     getUserInfoRx(accessToken).subscribe(
       profile => {

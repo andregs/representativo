@@ -11,4 +11,5 @@ before_install:
   - |
     echo 'export const config = { auth0: { domain: "$AUTH0_DOMAIN", clientId: "$AUTH0_CLIENT_ID" } };' > app-config.ts
 before_script:
-  - PATH=${PATH//:\.\/node_modules\/\.bin/}
+  - export PATH="$(npm bin):$PATH"
+  #- PATH=${PATH//:\.\/node_modules\/\.bin/}

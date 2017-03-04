@@ -1,4 +1,4 @@
-[![Bate Papo](https://badges.gitter.im/andregs/representativo.svg)](https://gitter.im/representativo)
+[![Bate-Papo](https://badges.gitter.im/andregs/representativo.svg)](https://gitter.im/representativo)
 [![Build Status](https://travis-ci.org/andregs/representativo.svg?branch=master)](https://travis-ci.org/andregs/representativo)
 [![Dependency Status](https://gemnasium.com/badges/github.com/andregs/representativo.svg)](https://gemnasium.com/github.com/andregs/representativo)
 
@@ -13,5 +13,7 @@ Inspirado em redes sociais como Tinder e Twitter, o Representativo funciona da s
  1. Eleitores e candidatos podem lançar perguntas ao público em geral, bem como respondê-las.
  1. Comparando as respostas de todo mundo, o aplicativo mostra quais candidatos possuem uma maior afinidade política com você.
 
-Siga o andamento do projeto no [Workflowy](https://workflowy.com/s/G_t9.ayAxEKW9Ag)!
+Interessado?
+Entre em contato pelo [bate-papo](https://gitter.im/representativo/Lobby) ou siga o andamento do projeto
+no [Workflowy](https://workflowy.com/s/G_t9.ayAxEKW9Ag)!
 - Estágio atual: nem mesmo alfa.

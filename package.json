@@ -21,7 +21,7 @@
     "build:server": "tsc -p server",
     "lint": "tslint server/**/*.ts client/**/*.ts",
     "test": "run-s --silent lint test:server test:client",
-    "test-watch": "run-p --silent \"test:client -- --single-run=false\" test:server:watch",
+    "test-watch": "run-p --silent \"test:client -- --single-run=false --auto-watch=true\" test:server:watch",
     "test:client": "karma start karma.conf.js --angular-cli.codeCoverage=true",
     "test:server": "ts-node -P server server/jasmine.js",
     "test:server:watch": "chokidar \"server/**\" -c \"npm run -s test:server\" --initial",

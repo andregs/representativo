@@ -20,4 +20,5 @@ notifications:
   webhooks:
     urls:
       - https://webhooks.gitter.im/e/1a4bab705b8648486f8c
+    on_success: change
     on_start: never

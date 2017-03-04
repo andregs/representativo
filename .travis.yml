@@ -7,9 +7,9 @@ before_install:
   - curl -s -L https://www.arangodb.com/repositories/travisCI/setup_arangodb_3.1.12.sh -o setup_arangodb.sh
   - chmod +x setup_arangodb.sh
   - ./setup_arangodb.sh
-  - npm run db:create
   - |
     echo 'export const config = { auth0: { domain: "$AUTH0_DOMAIN", clientId: "$AUTH0_CLIENT_ID" } };' > app-config.ts
 before_script:
-  - export PATH="$PATH:$(npm bin)"
+  - npm run db:create
+  #- export PATH="$PATH:$(npm bin)"
   #- PATH=${PATH//:\.\/node_modules\/\.bin/}

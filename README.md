@@ -1,6 +1,6 @@
+[![Bate Papo](https://badges.gitter.im/andregs/representativo.svg)](https://gitter.im/representativo)
 [![Build Status](https://travis-ci.org/andregs/representativo.svg?branch=master)](https://travis-ci.org/andregs/representativo)
-[![dependencies Status](https://david-dm.org/andregs/representativo/status.svg)](https://david-dm.org/andregs/representativo)
-[![devDependencies Status](https://david-dm.org/andregs/representativo/dev-status.svg)](https://david-dm.org/andregs/representativo?type=dev)
+[![Dependency Status](https://gemnasium.com/badges/github.com/andregs/representativo.svg)](https://gemnasium.com/github.com/andregs/representativo)
 
 # Representativo
 

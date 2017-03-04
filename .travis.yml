@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - "node"
+addons:
+  apt:
+    packages:
+      - xvfb
 before_install:
   - echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
   - echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections
@@ -10,6 +14,8 @@ before_install:
   - |
     echo 'export const config = { auth0: { domain: "$AUTH0_DOMAIN", clientId: "$AUTH0_CLIENT_ID" } };' > app-config.ts
 before_script:
+  - export DISPLAY=':99.0'
+  #- Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  #- "sh -e /etc/init.d/xvfb start"
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
   - npm run db:create
-  #- export PATH="$PATH:$(npm bin)"
-  #- PATH=${PATH//:\.\/node_modules\/\.bin/}

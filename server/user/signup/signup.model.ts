@@ -24,8 +24,8 @@ function signup(newUser: User, db: Database): Promise<User> {
     return user;
   });
 
-  const collections = { read: 'user', write: 'user' };
-  return db.transaction(collections, action, newUser);
+  const collections = { read: 'user', write: 'user' } as any;
+  return db.transaction(collections, action, newUser as any);
 }
 
 export default signup;

@@ -6,9 +6,12 @@
 // @import '~@angular/material/core/theming/prebuilt/pink-bluegrey';
 // @import '~@angular/material/core/theming/prebuilt/purple-green';
 
+body {
+  background-color: #eea;
+}
+
 a {
   text-decoration: none;
-  color: inherit;
   &:hover {
     text-decoration: underline;
   }

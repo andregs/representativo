@@ -1,13 +1,16 @@
 language: node_js
 node_js:
   - "node"
+cache:
+  directories:
+    - node_modules
 before_install:
   # Instalando o ArangoDB
   - echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
   - echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections
   - curl -s -L https://www.arangodb.com/repositories/travisCI/setup_arangodb_3.1.12.sh -o setup_arangodb.sh
   - chmod +x setup_arangodb.sh
-  - ./setup_arangodb.sh
+  - ./setup_arangodb.sh | grep -v "^ArangoDB-"
   - | # Criando o arquivo de configuração do nosso app
     echo 'export const config = { auth0: { domain: "$AUTH0_DOMAIN", clientId: "$AUTH0_CLIENT_ID" } };' > app-config.ts
 before_script:

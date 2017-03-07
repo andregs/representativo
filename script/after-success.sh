@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ $TRAVIS_BRANCH == 'master' ] ; then
   rm -rf .git

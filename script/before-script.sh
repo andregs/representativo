@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 # Iniciando o X para nossos testes no browser
 export DISPLAY=':99.0'

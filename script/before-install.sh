@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 # Instala o ArangoDB
 echo arangodb3 arangodb3/password password root | sudo debconf-set-selections

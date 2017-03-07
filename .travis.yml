@@ -1,23 +1,26 @@
 language: node_js
 node_js:
-  - "node"
+- node
 sudo: required
 cache:
   directories:
-    - node_modules
+  - node_modules
 addons:
   ssh_known_hosts: representativo.org
 before_install:
-  - ./script/before-install.sh
+- "./script/before-install.sh"
 before_script:
-  - ./script/before-script.sh
+- "./script/before-script.sh"
 script:
-  - npm run build-prod
+- npm run build-prod
 after_success:
-  - ./script/deploy.sh
+- "./script/deploy.sh"
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/1a4bab705b8648486f8c
+    - https://webhooks.gitter.im/e/1a4bab705b8648486f8c
     on_success: change
     on_start: never
+env:
+  global:
+    secure: K+pH6PAgSTzh4eYiabHnDOaDRjzlcXkYipIzFdo1oT099gmOSDIb31Nw8yZMZatAMKdyZEJZRKWKP86oo1Ci5quUD/81QICui/A8KU5eYrzECRl9PgjOR/ys3/jpn1oWIFYhG8/5VmmDy7gwpmHdfetOG2IS4XCWmeG92EbB8DlSG5G/WvIPMiajQbSd/d7pnWv5totwvKYzSQDnvQUeQkaL3+V1nA5nWFBa4XnpGpRshR1/i6y49QrS5GijCzazZsjxknO9DdXHOSwPptct/2YZrSYvJkEUNZ6lBK83sHr3A3B+aVsKNeSkxmHTSJCe69Ta+Roq328aw68g3PRIlNkWO2XxqHrb2HAb47HXurCB2n01pGEyOkiHgfd/bB6w+zyzttsRFY70iz9lIsM5BPVZmBmUeTNo+HiqbJGuJpM4MIfFYRcygTd5UgtLZFMgSpALWlY8I0U1hjwTQyt9gFlspvR/4goOu6N+dr7bd43RBPkZUKKY0IcTETWlor3sAg/4ioRcQFhnwPhGWLuGOp56ELzZ/Cv6rxfFGEOO0TX2P9ZurtJEWNu3OYS/5AJGh577HqqdZ3L83QEN2qFDRw5fyhINjqFutIeQ1iYJpBgD8wnfD+LXnIFQTfYGx3fC9c3YdL+9b7E2mEzeb6EiRwpVIW2qg89f1BGLKErMFUQ=

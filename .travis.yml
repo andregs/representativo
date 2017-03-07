@@ -7,6 +7,9 @@ cache:
   - node_modules
 addons:
   ssh_known_hosts: representativo.org
+  apt:
+    packages:
+      - xvfb
 before_install:
 - "./script/before-install.sh"
 before_script:

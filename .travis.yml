@@ -4,22 +4,16 @@ node_js:
 cache:
   directories:
     - node_modules
+addons:
+  ssh_known_hosts: representativo.org
 before_install:
-  # Instalando o ArangoDB
-  - echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
-  - echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections
-  - curl -s -L https://www.arangodb.com/repositories/travisCI/setup_arangodb_3.1.12.sh -o setup_arangodb.sh
-  - chmod +x setup_arangodb.sh
-  - ./setup_arangodb.sh > arango.log
-  - grep -v ^ArangoDB- arango.log
-  - | # Criando o arquivo de configuração do nosso app
-    echo 'export const config = { auth0: { domain: "$AUTH0_DOMAIN", clientId: "$AUTH0_CLIENT_ID" } };' > app-config.ts
+  - ./script/before-install.sh
 before_script:
-  # Iniciando o X para nossos testes no browser & criando o BD
-  - export DISPLAY=':99.0'
-  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
-  - npm run db:create
-script: npm run build-prod
+  - ./script/before-script.sh
+script:
+  - npm run build-prod
+after_success:
+  - ./script/deploy.sh
 notifications:
   webhooks:
     urls:

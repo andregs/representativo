@@ -1,7 +1,6 @@
 language: node_js
 node_js:
 - node
-sudo: required
 cache:
   directories:
   - node_modules
@@ -11,6 +10,8 @@ addons:
     packages:
       - xvfb
 before_install:
+- echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
+- echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections
 - "./script/before-install.sh"
 before_script:
 - "./script/before-script.sh"

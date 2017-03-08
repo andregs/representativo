@@ -1,14 +1,12 @@
 language: node_js
 node_js:
 - node
+sudo: false
 cache:
   directories:
   - node_modules
 addons:
   ssh_known_hosts: representativo.org
-  apt:
-    packages:
-      - xvfb
 before_install:
 - echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
 - echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections

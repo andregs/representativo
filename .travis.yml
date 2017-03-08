@@ -9,9 +9,8 @@ addons:
   ssh_known_hosts: representativo.org
 before_install:
 - "./script/before-install.sh"
-before_script:
-- "./script/before-script.sh"
 script:
+- npm run db:create
 - npm run build-prod
 after_success:
 - "./script/deploy.sh"

@@ -1,15 +1,13 @@
 language: node_js
 node_js:
 - node
-sudo: false
+sudo: required
 cache:
   directories:
   - node_modules
 addons:
   ssh_known_hosts: representativo.org
 before_install:
-- echo arangodb3 arangodb3/password password root | debconf-set-selections
-- echo arangodb3 arangodb3/password_again password root | debconf-set-selections
 - "./script/before-install.sh"
 before_script:
 - "./script/before-script.sh"

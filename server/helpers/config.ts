@@ -15,12 +15,12 @@ beforeAll(function () {
     subject: process.env.TEST_USER_ID,
     expiresIn: 5,
     audience: config.auth0.clientId,
-    issuer: `https://${config.auth0.domain}`
+    issuer: `https://${config.auth0.domain}`,
   };
   this.bearerToken = `Bearer ${jwt.sign(
     { username: process.env.TEST_USERNAME },
     new Buffer(process.env.AUTH0_SECRET, 'base64'),
-    options
+    options,
   )}`;
 });
 

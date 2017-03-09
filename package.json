@@ -19,7 +19,7 @@
     "build-prod": "npm-run-all --silent clean -p \"build:client -- -prod\" build:server",
     "build:client": "ng build --progress=false",
     "build:server": "tsc -p server",
-    "lint": "run-s -s lint:*",
+    "lint": "run-p -s lint:*",
     "lint:client": "tslint --type-check --project client/tsconfig.json client/**/*.ts",
     "lint:server": "tslint server/**/*.ts",
     "test": "run-s -s lint test:*",

@@ -7,14 +7,14 @@ import { LoginComponent } from './core/login/login.component';
 const routes: Routes = [{
   path: '',
   canActivate: [AuthGuard],
-  children: []
+  children: [],
 }, {
   path: 'login',
-  component: LoginComponent
+  component: LoginComponent,
 }, {
   path: 'perfil',
   canActivate: [AuthGuard],
-  component: ProfileComponent
+  component: ProfileComponent,
 }];
 
 /**
@@ -23,6 +23,6 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard],
 })
 export class AppRoutingModule { }

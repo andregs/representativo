@@ -32,8 +32,8 @@ export default class User {
       case 'emailVerified': return 'email_verified';
       case 'createdAt': return 'created_at';
       case 'updatedAt': return 'updated_at';
+      default: return key;
     }
-    return key;
   }
 
   constructor(_key: string) {

@@ -31,7 +31,7 @@ export class AuthService {
       this.emitUser(
         this.createLock(),
         localStorage.getItem('accessToken'),
-        localStorage.getItem('id_token')
+        localStorage.getItem('id_token'),
       );
     }
   }
@@ -69,7 +69,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('id_token');
     this.user.subscribe(
-      user => this.logoutSource.next(user)
+      user => this.logoutSource.next(user),
     );
   }
 
@@ -109,7 +109,7 @@ export class AuthService {
       (error: Error) => {
         this.logout();
         this.onError(lock, error);
-      }
+      },
     );
   }
 
@@ -119,7 +119,7 @@ export class AuthService {
   private protectStorage() {
     Observable.fromEvent<StorageEvent>(window, 'storage')
       .filter(event => ['accessToken', 'id_token'].some(
-        key => event.key === key && event.oldValue !== null
+        key => event.key === key && event.oldValue !== null,
       ))
       .subscribe(() => this.logout());
   }
@@ -139,8 +139,8 @@ export class AuthService {
     lock.show({
       flashMessage: {
         type: 'error',
-        text: error.error_description || error.message
-      }
+        text: error.error_description || error.message,
+      },
     });
   }
 

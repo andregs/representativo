@@ -14,7 +14,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule, RouterTestingModule]
+      imports: [CoreModule, RouterTestingModule],
     })
       .compileComponents();
   }));
@@ -46,7 +46,7 @@ describe('LoginComponent', () => {
         return {
           username: fixture.nativeElement.querySelector('input[name=username]'),
           password: fixture.nativeElement.querySelector('input[name=password]'),
-          submit
+          submit,
         };
       })
       .do(el => {

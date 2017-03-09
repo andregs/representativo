@@ -11,6 +11,6 @@ export function sendError(error: KnownError, response: Response) {
     .status(error.statusCode || 500)
     .json({
       name: error.name,
-      message: error.message
+      message: error.message,
     });
 }

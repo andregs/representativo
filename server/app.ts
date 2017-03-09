@@ -25,8 +25,8 @@ export class RepresentativoApp {
     this.routes.forEach(
       route => this.express.get(
         route,
-        (_, res) => res.sendFile(join(__dirname, '..', 'public', 'index.html'))
-      )
+        (_, res) => res.sendFile(join(__dirname, '..', 'public', 'index.html')),
+      ),
     );
 
     jwtChecker(this.express);

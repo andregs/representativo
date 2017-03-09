@@ -8,11 +8,11 @@ import { MaterialModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
     CommonModule,
-    MaterialModule
-  ]
+    MaterialModule,
+  ],
 })
 export class SharedModule { }

@@ -5,7 +5,7 @@ describe('AuthService', () => {
   describe('creation without an authenticated user', function () {
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [AuthService]
+        providers: [AuthService],
       });
     });
 
@@ -25,7 +25,7 @@ describe('AuthService', () => {
       Object.defineProperty(
         Object.getPrototypeOf(service),
         'authenticated',
-        { get: () => true }
+        { get: () => true },
       );
 
       expect(service).toBeTruthy();

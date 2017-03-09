@@ -25,8 +25,8 @@ describe('AppComponent', () => {
         set: {
           providers: [
             { provide: AuthService, useClass: MockAuthService },
-          ]
-        }
+          ],
+        },
       });
     TestBed.compileComponents();
   });

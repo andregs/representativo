@@ -14,10 +14,10 @@ describe('Signup Endpoint', function () {
       _key: 'asdf',
       email: 'asdf@example.com',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
     this.signupModel = spyOn(signup, 'default').and.callFake(
-      () => Promise.resolve(this.user)
+      () => Promise.resolve(this.user),
     );
   });
 

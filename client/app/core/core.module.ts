@@ -17,7 +17,7 @@ import { UserModule } from '../user/user.module';
   imports: [CommonModule, RouterModule, MaterialModule, UserModule],
   declarations: [LoginComponent, ToolbarComponent],
   exports: [LoginComponent, ToolbarComponent],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class CoreModule {
 

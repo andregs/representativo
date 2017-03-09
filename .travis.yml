@@ -10,8 +10,9 @@ addons:
 before_install:
 - "./script/before-install.sh"
 script:
-- npm run db:create
-- npm run build-prod
+- npm run -s db:create
+- npm run -s build-prod
+- npm test
 after_success:
 - "./script/deploy.sh"
 notifications:

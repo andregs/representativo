@@ -7,6 +7,7 @@ import 'hammerjs';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { HomeComponent } from './home/home.component';
 
 /**
  * Este módulo provê os serviços (singletons) a nível de aplicação.
@@ -14,7 +15,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
  */
 @NgModule({
   imports: [CommonModule, RouterModule, MaterialModule],
-  declarations: [LoginComponent, ToolbarComponent],
+  declarations: [LoginComponent, ToolbarComponent, HomeComponent],
   exports: [LoginComponent, ToolbarComponent],
   providers: [AuthService],
 })

@@ -7,14 +7,13 @@ import 'hammerjs';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { UserModule } from '../user/user.module';
 
 /**
  * Este módulo provê os serviços (singletons) a nível de aplicação.
  * Ele também declara alguns componentes usados no componente raiz {@link AppComponent}.
  */
 @NgModule({
-  imports: [CommonModule, RouterModule, MaterialModule, UserModule],
+  imports: [CommonModule, RouterModule, MaterialModule],
   declarations: [LoginComponent, ToolbarComponent],
   exports: [LoginComponent, ToolbarComponent],
   providers: [AuthService],

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 
 /**
  * O módulo principal que define a aplicação.
@@ -20,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule,
     UserModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

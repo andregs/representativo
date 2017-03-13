@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { SharedModule } from '../../shared/shared.module';
-import { AuthService } from '../auth.service';
+import { SharedModule } from '../shared/shared.module';
+import { AuthService } from '../core/auth.service';
+import { AskComponent } from './ask/ask.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,9 +13,9 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
       providers: [AuthService],
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent, AskComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

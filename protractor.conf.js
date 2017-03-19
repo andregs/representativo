@@ -2,7 +2,7 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 /*global jasmine */
-var SpecReporter = require('jasmine-spec-reporter').SpecReporter;
+const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -24,7 +24,6 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
-  useAllAngular2AppRoots: true,
   onPrepare: function() {
     require('ts-node').register({
       project: 'e2e'

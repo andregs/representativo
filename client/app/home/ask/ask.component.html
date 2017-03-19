@@ -1,5 +1,58 @@
-<md-card>
-  <p>
-    ask works!
-  </p>
-</md-card>
+<form id="qForm" name="qForm" #qForm="ngForm" *ngIf="step === 'asking'" (ngSubmit)="onAsk()">
+  <md-card fxLayout="column" fxLayoutAlign="space-between stretch">
+    <md-card-subtitle>Faça uma nova pergunta!</md-card-subtitle>
+    
+    <md-input-container>
+      <textarea #title="ngModel" name="title" [(ngModel)]="question.title"
+        required minlength="10" maxlength="140"
+        mdInput rows="1" reAutoWrap placeholder="Qual é o enunciado da pergunta?"
+      ></textarea>
+      <md-hint *ngIf="title.value" align="end">{{ 140 - title.value.length }}</md-hint>
+    </md-input-container>
+
+    <div *ngIf="title.valid" fxLayout="column" fxLayoutAlign="space-between stretch">
+      <p fxFlexAlign="stretch">Agora informe as opções de resposta:</p>
+      
+      <md-input-container>
+        <textarea #optionA="ngModel" name="optionA" [(ngModel)]="question.options[0]"
+          required minlength="3" maxlength="140"
+          mdInput rows="1" reAutoWrap placeholder="Alternativa A"
+        ></textarea>
+        <md-hint *ngIf="optionA.value" align="end">{{ 140 - optionA.value.length }}</md-hint>
+      </md-input-container>
+
+      <md-input-container>
+        <textarea #optionB="ngModel" name="optionB" [(ngModel)]="question.options[1]"
+          required minlength="3" maxlength="140"
+          mdInput rows="1" reAutoWrap placeholder="Alternativa B"
+        ></textarea>
+        <md-hint *ngIf="optionB.value" align="end">{{ 140 - optionB.value.length }}</md-hint>
+      </md-input-container>
+      
+      <button type="submit" md-button>Pronto</button>
+    </div>
+  </md-card>
+</form>
+
+<form id="aForm" name="aForm" #aForm="ngForm" *ngIf="step === 'answering'" (ngSubmit)="onAnswer()">
+  <md-card fxLayout="column" fxLayoutAlign="space-between stretch">
+
+    <md-card-subtitle>Agora responda:</md-card-subtitle>
+    <md-card-title>{{ question }}</md-card-title>
+
+    <md-radio-group [(ngModel)]="answer.chosen" name="answer">
+      <md-radio-button [value]="0">{{ question.options[0] }}</md-radio-button>
+      <md-radio-button [value]="1">{{ question.options[1] }}</md-radio-button>
+    </md-radio-group>
+
+    <md-input-container>
+      <textarea #opinion="ngModel" name="opinion" [(ngModel)]="answer.opinion"
+        maxlength="400"
+        mdInput rows="2" reAutoWrap placeholder="Quer detalhar seu ponto de vista?"
+      ></textarea>
+      <md-hint *ngIf="opinion.value?.length > 200" align="end">{{ 400 - opinion.value.length }}</md-hint>
+    </md-input-container>
+
+    <button type="submit" md-button>Salvar</button>
+  </md-card>
+</form>

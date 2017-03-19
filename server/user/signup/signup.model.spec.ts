@@ -4,8 +4,9 @@ import User from '../user';
 describe('Signup Model', function () {
 
   beforeEach(function(){
-    this.user = new User('huvs');
-    this.user.email = 'huvs@example.com';
+    const user = new User('huvs', process.env.TEST_USER_ID);
+    user.email = 'huvs@example.com';
+    this.user = user;
   });
 
   it('should save a new user on DB', async function (done) {

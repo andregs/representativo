@@ -31,7 +31,6 @@ module.exports = function (config) {
       // output: 'autowatch'
     },
     angularCli: {
-      config: './.angular-cli.json',
       environment: 'dev'
     },
     reporters: config.angularCli && config.angularCli.codeCoverage

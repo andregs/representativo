@@ -6,7 +6,11 @@ import { json } from 'body-parser';
 import signupEndpoint from './user/signup/signup.endpoint';
 import { Database } from 'arangojs';
 import jwtChecker from './user/jwt-checker.handler';
+import questionEndpoint from './qa/question.endpoint';
 
+/**
+ * Classe que define o servidor web da nossa aplicação.
+ */
 export class RepresentativoApp {
 
   private express = express();
@@ -19,7 +23,6 @@ export class RepresentativoApp {
 
   constructor(db: Database) {
     this.express.use(json());
-
     this.express.use(_static(join(__dirname, '..', 'public')));
 
     this.routes.forEach(
@@ -31,6 +34,7 @@ export class RepresentativoApp {
 
     jwtChecker(this.express);
     signupEndpoint(this.express, db);
+    questionEndpoint(this.express, db);
   }
 
   listen() {

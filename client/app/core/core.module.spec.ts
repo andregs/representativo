@@ -1,4 +1,5 @@
 import { CoreModule } from './core.module';
+
 describe('CoreModule', function () {
 
   it('should load CoreModule only once', function () {

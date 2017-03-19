@@ -4,6 +4,12 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthService } from '../core/auth.service';
 import { AskComponent } from './ask/ask.component';
+import { QuestionService } from './question.service';
+import { Observable } from 'rxjs/Observable';
+
+class MockAuthService {
+  user = Observable.of({});
+}
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,7 +18,10 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      providers: [AuthService],
+      providers: [
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: QuestionService, useValue: {} },
+      ],
       declarations: [HomeComponent, AskComponent],
     })
       .compileComponents();

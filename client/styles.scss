@@ -28,10 +28,14 @@ a {
   }
 }
 
+md-card {
+  margin-bottom: $space;
+}
+
 .flex-fill {
   flex: 1 1 auto;
 }
 
-md-card {
-  margin-bottom: $space;
+.text-left {
+  text-align: left !important;
 }

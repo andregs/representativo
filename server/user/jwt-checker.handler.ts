@@ -10,9 +10,9 @@ function jwtChecker(express: Express) {
   express.use(
     '/api/*',
     jwt({
-      secret: new Buffer(process.env.AUTH0_SECRET, 'base64'),
+      secret: process.env.AUTH0_SECRET,
       audience: config.auth0.clientId,
-      issuer: `https://${config.auth0.domain}`,
+      issuer: `https://${config.auth0.domain}/`,
     }),
   );
 }

@@ -128,6 +128,7 @@ export class AuthService {
    * Emite o usuário que acabou de se autenticar no lock.
    */
   private onAuthenticated(lock, authResult): void {
+    lock.hide();
     this.emitUser(lock, authResult.accessToken, authResult.idToken);
   }
 

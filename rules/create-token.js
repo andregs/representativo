@@ -13,11 +13,11 @@ function createToken(user, context, callback) {
     subject: user.user_id,
     expiresInMinutes: 1,
     audience: configuration.CLIENT_ID,
-    issuer: configuration.JWT_ISSUER // like https://{your auth0 account}.auth0.com
+    issuer: configuration.JWT_ISSUER // like https://{your auth0 account}.auth0.com/
   };
   user.idToken = jwt.sign(
     { username: user.username },
-    new Buffer(configuration.CLIENT_SECRET, 'base64'),
+    configuration.CLIENT_SECRET,
     options
   );
   callback(null, user, context);

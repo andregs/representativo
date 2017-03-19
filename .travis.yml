@@ -13,8 +13,12 @@ script:
 - npm run -s db:create
 - npm run -s build-prod
 - npm test
-after_success:
-- "./script/deploy.sh"
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: script/deploy.sh
+  on:
+    branch: master
 notifications:
   webhooks:
     urls:

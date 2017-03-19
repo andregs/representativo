@@ -5,7 +5,7 @@ describe('AutoWrapDirective', function () {
 
   beforeEach(function () {
     directive = new AutoWrapDirective(
-      { nativeElement: { rows: 2 } },
+      { nativeElement: { rows: 2, style: {} } },
     );
   });
 

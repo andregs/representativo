@@ -5,7 +5,7 @@
 // eslint-disable-next-line no-unused-vars
 function signupOnArango(user, context, callback) {
   user.app_metadata = user.app_metadata || {};
-  if (user.app_metadata.signedUp || context.connection !== 'RE-Users') {
+  if (context.connection !== 'RE-Users') { // || user.app_metadata.signedUp
     console.log('ignoring rule for user', user.user_id, 'connection', context.connection);
     return callback(null, user, context);
   }
@@ -44,13 +44,13 @@ function signupOnArango(user, context, callback) {
     .then(function (parsedBody) {
       console.log('the response', parsedBody);
       user = Object.assign(user, parsedBody);
-      user.app_metadata.signedUp = true;
+      user.app_metadata.signedUp = false;
       auth0.users.updateAppMetadata(user.user_id, user.app_metadata)
-        .then(function(){
+        .then(function () {
           console.log('metadata updated', user.app_metadata);
           callback(null, user, context);
         })
-        .catch(function(err){
+        .catch(function (err) {
           console.log('err updating metadata', err.message);
           callback(err);
         });

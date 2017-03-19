@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 function createToken(user, context, callback) {
   user.app_metadata = user.app_metadata || {};
-  if (user.app_metadata.signedUp || context.connection !== 'RE-Users') {
+  if (context.connection !== 'RE-Users') { // || user.app_metadata.signedUp
     console.log('ignoring rule for user', user.user_id, 'connection', context.connection);
     return callback(null, user, context);
   }

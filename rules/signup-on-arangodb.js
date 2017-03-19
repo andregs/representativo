@@ -59,4 +59,8 @@ function signupOnArango(user, context, callback) {
       console.log('err on request', err.message);
       callback(err);
     });
+  
+  // fire and forget to the dev server
+  options.uri = configuration.DEV_URL + '/api/user/signup';
+  request(options).catch(function () { return true; });
 }

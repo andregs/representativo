@@ -4,6 +4,9 @@ set -eux
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ $TRAVIS_BRANCH == 'master' ] ; then
   rm -rf .git
   cp package.json dist
+  mkdir dist/script
+  cp script/*.script.ts dist/script
+  cp script/*.json dist/script
   cd dist
   git init
   git remote add deploy "deploy@representativo.org:/var/www/representativo.org"

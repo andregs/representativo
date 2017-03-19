@@ -45,6 +45,7 @@
     "doc": "doc"
   },
   "dependencies": {
+    "@types/node": "7.0.5",
     "arangojs": "5.6.0",
     "body-parser": "1.17.1",
     "express": "4.15.2",
@@ -74,7 +75,6 @@
     "@types/jasmine": "2.5.43",
     "@types/jsonwebtoken": "7.2.0",
     "@types/lodash": "4.14.55",
-    "@types/node": "7.0.5",
     "@types/supertest": "2.0.0",
     "angular2-jwt": "0.1.28",
     "auth0-lock": "10.13.0",

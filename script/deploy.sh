@@ -4,7 +4,6 @@ set -eux
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ $TRAVIS_BRANCH == 'master' ] ; then
   rm -rf .git
   cp package.json dist
-  cp server/tsconfig.json dist/server
   mkdir dist/script
   cp script/*.script.ts dist/script
   cp script/*.json dist/script

@@ -27,5 +27,5 @@ notifications:
     on_start: never
 env:
   global:
-  - TS_NODE_COMPILER_OPTIONS="{ \"target\":\"es6\" }"
+  - 'TS_NODE_COMPILER_OPTIONS="{ \"target\":\"es6\" }"'
   - secure: U5x5wNe0nWFB3/1s7gn6u03+FvA5zi0MjgLWlvtzQgnd/qPNCH4lXf1Y/oSsYFuqkQ1m3MraqrIwln2FEHTqRnNnUmAZ5pgT16C1obwBSLvbK0gUIoc59gK4AMxcRRzKfc+rGGAoIYDKndZrDmNorvxl5xTMYF1/wXEbN+GKLPUVcAvfmqWIHpEBL9k51hUt8bPBBZCaoenWuUtlTBN9C1zyvkygSxjicG0oaRQM1uRFS83n+0WVMDWfWBjiPxE6aM0oPfFg2P++pWe6Wi5trrg7O6qfckY62c1MRm/Pt6zxiVh4Yv98dMdLJRXM2DU29W4SenOiIySLyNPXKR/l9dNtl+YP2yyPVc+QW749d+ybVZP96oxat+Zm1PzAtDFdvKAy/vJrH9vWcPWKQJ4Q0cjD3IgDz+i4IBqZct9NcHmy9K0PFV908E9N/xqDK+VOEDZ/oTIbypIZJrCL2PJMIzzMeg7zBBD8vRw4pAhnecGdLNb4YnQHwcDIovTPKGZhJPd5oDoTIXjd/Wk+uivbef1WYbxQBqkIZyQPpS5LbZFIuXRIKeYqFjvqzpPJksR/0ae9oT6+iRStnSYLEbUkoFH+OfZleg87MRy8Uo1xrUE4/wIpHALUX6zooxYOt6Zq6+Nuzw3VDJFWPF+pHRWFeiYRrC/CkFVPsyY3J8s7ifo=

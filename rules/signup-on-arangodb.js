@@ -52,15 +52,18 @@ function signupOnArango(user, context, callback) {
         })
         .catch(function (err) {
           console.log('err updating metadata', err.message);
-          callback(err);
+          callback('Erro interno do servidor');
         });
     })
-    .catch(function (err) {
-      console.log('err on request', err.message);
-      callback(err);
+    .catch(function (res) {
+      console.log('err on request', res.message, res.error);
+      callback('Erro interno do servidor');
     });
-  
+
   // fire and forget to the dev server
   options.uri = configuration.DEV_URL + '/api/user/signup';
-  request(options).catch(function () { return true; });
+  //console.log('the dev request', options);
+  request(options)
+    //.then(function(res) { console.log('the dev response', res); })
+    .catch(function (res) { console.log('err on dev request', res.message); });
 }

@@ -1,6 +1,7 @@
 import { Database } from 'arangojs';
 import Question from './question';
 import Answer from './answer';
+import ModelError from '../shared/model-error';
 
 /**
  * Salva uma nova pergunta na base de dados.
@@ -10,6 +11,10 @@ import Answer from './answer';
  * @param db banco onde os dados serão salvos
  */
 function ask(question: Question, answer: Answer, questioner: string, db: Database): Promise<Question> {
+
+  if (!question.valid || !answer.valid) {
+    throw new ModelError();
+  }
 
   interface Params {
     question: Question;

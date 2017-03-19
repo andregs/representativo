@@ -6,7 +6,7 @@
     "callable-types": true,
     "curly": false,
     "jsdoc-format": false,
-    "import-blacklist": [true, "rxjs", "lodash"],
+    "import-blacklist": [true, "rxjs"],
     "import-spacing": true,
     "interface-name": [false],
     "interface-over-type-literal": true,

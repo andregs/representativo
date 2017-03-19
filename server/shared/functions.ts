@@ -1,12 +1,7 @@
 import { Response } from 'express';
+import ModelError from './model-error';
 
-interface KnownError {
-  name: string;
-  statusCode?: number;
-  message: string;
-};
-
-export function sendError(error: KnownError, response: Response) {
+export function sendError(error: ModelError, response: Response) {
   response
     .status(error.statusCode || 500)
     .json({

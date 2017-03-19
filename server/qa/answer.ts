@@ -1,5 +1,5 @@
 import { autoserialize, autoserializeAs, deserializeAs } from 'cerialize';
-import pick from 'lodash/pick';
+import { inRange, pick, trim } from 'lodash';
 import Question from './question';
 
 /** Representa a resposta de uma pergunta. */
@@ -22,6 +22,11 @@ export default class Answer {
 
   get _id() {
     return `answer/${this._key}`;
+  }
+
+  get valid(): boolean {
+    return (this.chosen === 0 || this.chosen === 1)
+      && inRange(trim(this.opinion).length, 0, 401);
   }
 
 }

@@ -40,7 +40,7 @@
     <md-card-subtitle>Agora responda:</md-card-subtitle>
     <md-card-title>{{ question }}</md-card-title>
 
-    <md-radio-group [(ngModel)]="answer.chosen" name="answer">
+    <md-radio-group [(ngModel)]="answer.chosen" name="answer" required>
       <md-radio-button [value]="0">{{ question.options[0] }}</md-radio-button>
       <md-radio-button [value]="1">{{ question.options[1] }}</md-radio-button>
     </md-radio-group>

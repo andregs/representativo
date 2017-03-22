@@ -4,6 +4,7 @@ import ask from './ask.model';
 import { sendError } from '../shared/functions';
 import Question from './question';
 import Answer from './answer';
+import { GenericDeserialize as Deserialize } from 'cerialize';
 
 /**
  * Cria uma nova pergunta no app.
@@ -30,8 +31,8 @@ function questionEndpoint(express: Express, db: Database) {
   express.route(base)
     .post(async (req: Request, res: Response) => {
       try {
-        const question = req.body.question as Question;
-        const answer = req.body.answer as Answer;
+        const question = Deserialize(req.body.question, Question);
+        const answer = Deserialize(req.body.answer, Answer);
         const newQuestion = await ask(question, answer, req.user.sub, db);
         res.set('Location', `${base}/${newQuestion._key}`);
         res.sendStatus(201);

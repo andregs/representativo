@@ -1,4 +1,4 @@
-import { autoserialize, deserializeAs, autoserializeAs } from 'cerialize';
+import { autoserialize, deserializeAs } from 'cerialize';
 import { inRange, trim } from 'lodash';
 
 import User from '../user/user';
@@ -10,7 +10,7 @@ export default class Question {
   @autoserialize readonly _rev: string;
 
   @autoserialize title: string;
-  @autoserializeAs(String) readonly options = ['', ''];
+  @autoserialize readonly options = Array<string>('', '');
   @deserializeAs(User) questioner: User;
 
   @deserializeAs(Date) readonly createdAt: Date;

@@ -52,9 +52,8 @@ export class AskComponent {
    * Ao enviar o form de resposta, submete pergunta & resposta ao backend.
    */
   onAnswer() {
-    if (this.qForm.valid && this.aForm.valid) {
-      this.service.ask(this.question, this.answer)
-        .subscribe(() => this.reset());
+    if (this.aForm.valid) {
+      this.service.ask(this.question, this.answer).subscribe(() => this.reset());
     }
   }
 

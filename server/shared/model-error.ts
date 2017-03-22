@@ -1,8 +1,9 @@
 
 export default class ModelError extends Error {
   statusCode: number;
+  name = 'ModelError';
 
-  constructor(message?: string, code = 400) {
+  constructor(message = 'Bad Request', code = 400) {
     super(message);
     this.statusCode = code;
   }

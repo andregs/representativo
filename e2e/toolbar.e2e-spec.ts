@@ -8,14 +8,14 @@ describe('Toolbar Component', function () {
     page = new ToolbarPO();
   });
 
-  it('should browse to the user profile', function () {
-    page.goToProfile();
-    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + "perfil");
+  it('should browse to the user profile', async function () {
+    await page.goToProfile();
+    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "perfil");
   });
 
-  it('should browse to the home page', function () {
-    page.goToHome();
-    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl);
+  it('should browse to the home page', async function () {
+    await page.goToHome();
+    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl);
   });
 
 });

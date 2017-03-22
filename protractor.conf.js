@@ -24,6 +24,7 @@ exports.config = {
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
+  SELENIUM_PROMISE_MANAGER: false,
   onPrepare: function() {
     require('ts-node').register({
       project: 'e2e'

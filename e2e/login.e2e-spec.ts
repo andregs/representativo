@@ -2,10 +2,10 @@ import { browser } from 'protractor';
 import { LoginPO } from './po/login.po';
 import { ToolbarPO } from './po/toolbar.po';
 
-beforeAll(function () {
+beforeAll(async function () {
   const login = new LoginPO();
-  login.navigateTo();
-  login.login();
+  await login.navigateTo();
+  await login.login();
   this.login = login;
   this.toolbar = new ToolbarPO();
 });
@@ -19,26 +19,26 @@ describe('Login Route', function () {
     toolbar = this.toolbar;
   });
 
-  it('should not be authenticated yet', function () {
-    toolbar.logout();
-    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + login.url);
-    expect(toolbar.logoutElm.isPresent()).toBeFalsy();
-    expect(toolbar.profileElm.isPresent()).toBeFalsy();
+  it('should not be authenticated yet', async function () {
+    await toolbar.logout();
+    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + login.url);
+    expect(await toolbar.logoutElm.isPresent()).toBeFalsy();
+    expect(await toolbar.profileElm.isPresent()).toBeFalsy();
   });
 
-  it('should have the proper logo & subtitle', function () {
-    expect(toolbar.logoText).toBe('Representativo');
-    expect(login.subtitle).toMatch(/Bem-vindo ao Representativo/);
+  it('should have the proper logo & subtitle', async function () {
+    expect(await toolbar.logoText).toBe('Representativo');
+    expect(await login.subtitle).toMatch(/Bem-vindo ao Representativo/);
   });
 
-  it('should login the user', function () {
-    login.reLogin();
-    expect(toolbar.profileIcon).toBe('person');
-    expect(toolbar.logoutIcon).toBe('power_settings_new');
+  it('should login the user', async function () {
+    await login.reLogin();
+    expect(await toolbar.profileIcon).toBe('person');
+    expect(await toolbar.logoutIcon).toBe('power_settings_new');
   });
 
-  it('should redirect the user after login', function () {
-    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl);
+  it('should redirect the user after login', async function () {
+    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl);
   });
 
 });

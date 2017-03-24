@@ -10,7 +10,6 @@ import { QuestionService } from './question.service';
 @NgModule({
   imports: [SharedModule],
   declarations: [HomeComponent, AskComponent],
-  exports: [HomeComponent, AskComponent],
   providers: [QuestionService],
 })
 export class HomeModule { }

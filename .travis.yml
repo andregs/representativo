@@ -6,7 +6,9 @@ cache:
   directories:
   - node_modules
 addons:
-  ssh_known_hosts: representativo.org
+  ssh_known_hosts:
+  - representativo.org
+  - 45.55.142.185 # representativo.org
 before_install:
 - "./script/before-install.sh"
 script:

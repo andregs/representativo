@@ -23,6 +23,7 @@ function ask(question: Question, answer: Answer, questioner: string, db: Databas
   }
 
   const p = { question, answer, questioner } as Params;
+  /* istanbul ignore next because it's a string */
   const action = String(function (params: Params) {
     const gm = require('@arangodb/general-graph');
     const graph = gm._graph('qaGraph');

@@ -1,38 +1,27 @@
 import { AuthGuard } from './auth-guard.service';
 
-class MockAuth {
-  authenticated = true;
-}
+describe('AuthGuard', () => {
+  let mockAuth: any, mockRouter: any, service: AuthGuard;
 
-class MockRouter {
-  navigate = jasmine.createSpy('navigate');
-}
-
-describe('AuthGuardService', () => {
-  let authService: MockAuth, router: MockRouter, service: AuthGuard;
-
-  beforeEach(function(){
-    authService = new MockAuth();
-    router = new MockRouter();
-    service = new AuthGuard(authService as any, router as any);
+  beforeEach(function () {
+    mockAuth = { authenticated: true };
+    mockRouter = {
+      navigate: jasmine.createSpy('navigate'),
+    };
+    service = new AuthGuard(mockAuth as any, mockRouter as any);
   });
 
-  it('should allow authenticated users', function () {
-    expect(authService.authenticated).toBeTruthy();
-    service.canActivate()
-      .then(result => {
-        expect(result).toBe(true);
-        expect(router.navigate).not.toHaveBeenCalled();
-      });
+  it('should allow authenticated users', async function (done) {
+    mockAuth.authenticated = true;
+    expect(await service.canActivate()).toBe(true);
+    expect(mockRouter.navigate).not.toHaveBeenCalled();
+    done();
   });
 
-  it('should navigate unauthenticated users to login', function () {
-    authService.authenticated = false;
-    expect(authService.authenticated).toBeFalsy();
-    service.canActivate()
-      .then(result => {
-        expect(result).toBe(false);
-        expect(router.navigate).toHaveBeenCalled();
-      });
+  it('should navigate unauthenticated users to login', async function (done) {
+    mockAuth.authenticated = false;
+    expect(await service.canActivate()).toBe(false);
+    expect(mockRouter.navigate).toHaveBeenCalledTimes(1);
+    done();
   });
 });

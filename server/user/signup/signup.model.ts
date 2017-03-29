@@ -5,6 +5,7 @@ import User from '../user';
  * Cadastra um novo usuário no app.
  */
 function signup(newUser: User, db: Database): Promise<User> {
+  /* istanbul ignore next because it's a string */
   const action = String(function (params: any) {
     const gm = require("@arangodb/general-graph");
     const graph = gm._graph('userGraph');
@@ -17,7 +18,7 @@ function signup(newUser: User, db: Database): Promise<User> {
       // normalmente os usuários são criados no Auth0 e, então, seus dados vêm pra cá
       user = graph.user.save(userData);
     } else {
-      // mas, em casos como o do usuário `admin`, o registro já existe no BD antes do Auth0
+      // mas, em casos como o do usuário 'admin', o registro já existe no BD antes do Auth0
       user = graph.user.update(userData._key, userData);
     }
 

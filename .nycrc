@@ -1,0 +1,28 @@
+{
+  "check-coverage": true,
+  "statements": 75,
+  "branches": 75,
+  "functions": 75,
+  "lines": 75,
+  "watermarks": {
+    "statements": [75, 85],
+    "branches": [75, 85],
+    "functions": [75, 85],
+    "lines": [75, 85]
+  },
+  "reporter": [
+    "lcov"
+  ],
+  "include": [
+    "**/*.js"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/*.spec.js",
+    "**/jasmine.js",
+    "**/helpers"
+  ],
+  "sourceMap": true,
+  "cache": true,
+  "all": false
+}

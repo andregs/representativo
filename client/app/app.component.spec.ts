@@ -1,52 +1,34 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { AuthService } from './core/auth.service';
-import { SharedModule } from './shared/shared.module';
-import { UserModule } from './user/user.module';
-import { Observable } from 'rxjs/Observable';
-
-class MockAuthService {
-  tryAutomaticLogin = jasmine.createSpy('tryAutomaticLogin');
-  displayLoginForm = jasmine.createSpy('displayLoginForm');
-  onLogout() {
-    return Observable.of({});
-  }
-}
+import { Subject } from 'rxjs/Subject';
 
 describe('AppComponent', () => {
+
+  let component: AppComponent;
+  let mockAuthService, mockRouter, logout$: Subject<{}>;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, CoreModule, SharedModule, UserModule],
-      declarations: [AppComponent],
-    })
-      .overrideModule(CoreModule, {
-        set: {
-          providers: [
-            { provide: AuthService, useClass: MockAuthService },
-          ],
-        },
-      });
-    TestBed.compileComponents();
+    logout$ = new Subject();
+    mockAuthService = {
+      tryAutomaticLogin: jasmine.createSpy('tryAutomaticLogin'),
+      onLogout() { return logout$; },
+    };
+    mockRouter = {
+      navigate: jasmine.createSpy('navigate'),
+    };
+    component = new AppComponent(mockAuthService, mockRouter);
   });
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'Representativo'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Representativo');
-  }));
-
-  it('should try to log the user automatically', function () {
-    const fixture = TestBed.createComponent(AppComponent);
-    const service = fixture.debugElement.injector.get(AuthService) as AuthService;
-    fixture.detectChanges();
-    expect(service.tryAutomaticLogin).toHaveBeenCalled();
+  it('should try login on init', function () {
+    component.ngOnInit();
+    expect(mockAuthService.tryAutomaticLogin).toHaveBeenCalledTimes(1);
+    expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
+
+  it('should navigate on logout', function () {
+    component.ngOnInit();
+    expect(mockRouter.navigate).not.toHaveBeenCalled();
+    logout$.next();
+    expect(mockRouter.navigate).toHaveBeenCalledTimes(1);
+  });
+
 });

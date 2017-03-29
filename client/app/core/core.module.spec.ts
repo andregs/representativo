@@ -6,7 +6,7 @@ describe('CoreModule', function () {
     let core, coreWithParent, exception;
 
     try {
-      core = new CoreModule(null);
+      core = new CoreModule();
       coreWithParent = new CoreModule(core);
     } catch (e) {
       exception = e;

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
-import Auth0Lock from 'auth0-lock';
 import { Deserialize, DeserializeKeysFrom } from 'cerialize';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/observable/bindNodeCallback';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/filter';
 
 import { config } from '../../../app-config';
 import User from '../../../server/user/user';
@@ -18,9 +18,14 @@ export class AuthService {
 
   private readonly userSource = new ReplaySubject<User>(1);
   private readonly logoutSource = new Subject<User>();
+  private readonly storage: Storage;
+  private readonly Auth0Lock: any;
+  private readonly isAuthenticated: () => boolean;
 
-  constructor() {
-    this.protectStorage();
+  constructor(window: any, Auth0Lock: any, isAuthenticated: () => boolean) {
+    this.Auth0Lock = Auth0Lock;
+    this.isAuthenticated = isAuthenticated;
+    this.storage = this.protectStorage(window);
   }
 
   /**
@@ -30,8 +35,8 @@ export class AuthService {
     if (this.authenticated) {
       this.emitUser(
         this.createLock(),
-        localStorage.getItem('accessToken'),
-        localStorage.getItem('id_token'),
+        this.storage.getItem('accessToken') as any,
+        this.storage.getItem('id_token') as any,
       );
     }
   }
@@ -59,15 +64,15 @@ export class AuthService {
    */
   get authenticated(): boolean {
     // is there a non-expired 'id_token' in localStorage?
-    return tokenNotExpired();
+    return this.isAuthenticated();
   }
 
   /**
    * Mata a sessão do usuário atual.
    */
   logout(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('id_token');
+    this.storage.removeItem('accessToken');
+    this.storage.removeItem('id_token');
     this.user.subscribe(
       user => this.logoutSource.next(user),
     );
@@ -87,7 +92,7 @@ export class AuthService {
 
     if (container) options.container = container;
 
-    return new Auth0Lock(config.auth0.clientId, config.auth0.domain, options);
+    return new this.Auth0Lock(config.auth0.clientId, config.auth0.domain, options);
   }
 
   /**
@@ -101,9 +106,9 @@ export class AuthService {
       profile => {
         DeserializeKeysFrom(User.keyTransformer);
         const user: User = Deserialize(profile, User);
-        DeserializeKeysFrom(null);
-        localStorage.setItem('id_token', idToken);
-        localStorage.setItem('accessToken', accessToken);
+        DeserializeKeysFrom(null as any);
+        this.storage.setItem('id_token', idToken as any);
+        this.storage.setItem('accessToken', accessToken as any);
         this.userSource.next(user);
       },
       (error: Error) => {
@@ -116,12 +121,13 @@ export class AuthService {
   /**
    * Mata a sessão se o usuário alterar os valores da localStorage (ex. via F12).
    */
-  private protectStorage() {
+  private protectStorage(window: Window) {
     Observable.fromEvent<StorageEvent>(window, 'storage')
       .filter(event => ['accessToken', 'id_token'].some(
         key => event.key === key && event.oldValue !== null,
       ))
       .subscribe(() => this.logout());
+    return window.localStorage;
   }
 
   /**

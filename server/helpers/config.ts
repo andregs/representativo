@@ -31,4 +31,12 @@ beforeEach(function () {
   this.express = express();
   this.express.use(json());
   jwtChecker(this.express);
+  this.express.use(function (err, _, res, next) {
+    if (err && err.status) {
+      res.status(err.status);
+      res.json(err.inner);
+    } else {
+      next(err);
+    }
+  });
 });

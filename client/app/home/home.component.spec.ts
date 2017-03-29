@@ -1,39 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
-import { SharedModule } from '../shared/shared.module';
-import { AuthService } from '../core/auth.service';
-import { AskComponent } from './ask/ask.component';
-import { QuestionService } from './question.service';
 import { Observable } from 'rxjs/Observable';
 
-class MockAuthService {
-  user = Observable.of({});
-}
-
-describe('HomeComponent', () => {
+describe('HomeComponent', function () {
   let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let user: Observable<any>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule],
-      providers: [
-        { provide: AuthService, useClass: MockAuthService },
-        { provide: QuestionService, useValue: {} },
-      ],
-      declarations: [HomeComponent, AskComponent],
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(function () {
+    user = Observable.of(true);
+    component = new HomeComponent({ user } as any);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should get the authenticated user', function () {
+    component.ngOnInit();
+    expect(component.user).toBeTruthy();
   });
+
 });

@@ -1,14 +1,16 @@
+require('reflect-metadata');
 const Jasmine = require('jasmine');
 const jasmine = new Jasmine();
 
 jasmine.loadConfig({
-  spec_dir: './server',
+  spec_dir: './dist/server',
   spec_files: [
     // a ordem dos nossos testes importa
-    'user/**/*.spec.ts',
-    '**/*.spec.ts',
+    'user/**/*.spec.js',
+    '**/*.spec.js',
+    '../client/**/*.spec.js',
   ],
-  helpers: ['helpers/**/*.ts']
+  helpers: ['helpers/**/*.js']
 });
 
 jasmine.execute();

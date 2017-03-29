@@ -11,12 +11,14 @@
     "outDir": "../dist/public/out-tsc",
     "sourceMap": true,
     "target": "es5",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "typeRoots": [
       "../node_modules/@types"
     ],
     "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
     "pretty": true
   }
 }

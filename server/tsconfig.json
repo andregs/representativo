@@ -5,9 +5,8 @@
     "experimentalDecorators": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "mapRoot": "../dist",
     "outDir": "../dist",
-    "sourceMap": true,
+    "inlineSourceMap": true,
     "target": "es6",
     "typeRoots": [
       "../node_modules/@types"
@@ -16,10 +15,12 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "allowJs": true,
     "pretty": true
   },
-  "exclude": [
-    "helpers",
-    "**/*.spec.ts"
+  "include": [
+    "./**/*",
+    "../client/**/*.spec.ts"
   ]
 }

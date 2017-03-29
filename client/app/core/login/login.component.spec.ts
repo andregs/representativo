@@ -1,38 +1,45 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-
+import { Subject } from 'rxjs/Subject';
 import { LoginComponent } from './login.component';
-import { CoreModule } from '../core.module';
-import { AuthService } from '../auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let service: AuthService;
+  let mockService: any, mockRouter: any;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [CoreModule, RouterTestingModule],
-    })
-      .compileComponents();
-  }));
+  beforeEach(function () {
+    mockService = {
+      auth: true,
+      get authenticated() { return this.auth; },
+      displayLoginForm: jasmine.createSpy('displayLoginForm'),
+      user: new Subject(),
+    };
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    service = fixture.debugElement.injector.get(AuthService);
-    component = fixture.componentInstance;
-    component.auth0Redirect = false;
-    component.auth0Remember = false;
-    localStorage.clear();
-    fixture.detectChanges();
+    mockRouter = {
+      navigate: jasmine.createSpy('navigate'),
+    };
+
+    component = new LoginComponent(mockService, mockRouter);
   });
 
-  afterEach(() => {
-    localStorage.clear();
+  it('should display login form when user is unknown', () => {
+    mockService.auth = false;
+    expect(mockService.displayLoginForm).not.toHaveBeenCalled();
+    component.ngOnInit();
+    expect(mockService.displayLoginForm).toHaveBeenCalledTimes(1);
+    expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
 
-  it('should create LoginComponent', () => {
-    expect(component).toBeTruthy();
+  it('should not display login form when user is authenticated', () => {
+    mockService.auth = true;
+    expect(mockService.displayLoginForm).not.toHaveBeenCalled();
+    component.ngOnInit();
+    expect(mockService.displayLoginForm).not.toHaveBeenCalled();
+    expect(mockRouter.navigate).not.toHaveBeenCalled();
+  });
+
+  it('should redirect the user on login', () => {
+    component.ngOnInit();
+    mockService.user.next();
+    expect(mockRouter.navigate).toHaveBeenCalledTimes(1);
   });
 
 });

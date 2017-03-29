@@ -12,8 +12,8 @@ import Answer from '../../../server/qa/answer';
 @Injectable()
 export class QuestionService {
 
-  private readonly endpoint = 'api/question';
-  private readonly http: AuthHttp;
+  readonly endpoint = 'api/question';
+  readonly http: AuthHttp;
 
   constructor(http: AuthHttp) {
     this.http = http;

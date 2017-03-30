@@ -11,7 +11,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SharedModule } from '../shared/shared.module';
 
 let win = {}; // o jasmine (node) não conhece window
-if ('undefined' === typeof window) win = window;
+if (typeof window !== 'undefined') win = window;
 
 /**
  * Este módulo provê os serviços (singletons) a nível de aplicação.

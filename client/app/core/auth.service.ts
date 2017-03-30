@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Deserialize, DeserializeKeysFrom } from 'cerialize';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -22,7 +22,11 @@ export class AuthService {
   private readonly Auth0Lock: any;
   private readonly isAuthenticated: () => boolean;
 
-  constructor(window: any, Auth0Lock: any, isAuthenticated: () => boolean) {
+  constructor(
+    @Inject('window') window: any,
+    @Inject('Auth0Lock') Auth0Lock: any,
+    @Inject('isAuthenticated') isAuthenticated: any,
+  ) {
     this.Auth0Lock = Auth0Lock;
     this.isAuthenticated = isAuthenticated;
     this.storage = this.protectStorage(window);

@@ -27,14 +27,14 @@ if ('undefined' === typeof window) win = window;
   exports: [ToolbarComponent],
   providers: [
     { provide: 'window', useValue: win },
-    { provide: Auth0Lock, useValue: Auth0Lock },
+    { provide: 'Auth0Lock', useValue: Auth0Lock },
     { provide: 'isAuthenticated', useValue: tokenNotExpired },
     {
       provide: AuthService,
       useClass: AuthService,
       deps: [
         'window',
-        Auth0Lock,
+        'Auth0Lock',
         'isAuthenticated',
       ],
     },

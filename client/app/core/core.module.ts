@@ -10,8 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SharedModule } from '../shared/shared.module';
 
-let win = {}; // o jasmine (node) não conhece window
-if (typeof window !== 'undefined') win = window;
+export function getWindow() { return window; }
+export function getAuth0Lock() { return Auth0Lock; }
 
 /**
  * Este módulo provê os serviços (singletons) a nível de aplicação.
@@ -26,17 +26,13 @@ if (typeof window !== 'undefined') win = window;
   declarations: [LoginComponent, ToolbarComponent],
   exports: [ToolbarComponent],
   providers: [
-    { provide: 'window', useValue: win },
-    { provide: 'Auth0Lock', useValue: Auth0Lock },
+    { provide: 'Window', useFactory: getWindow },
+    { provide: 'Auth0Lock', useFactory: getAuth0Lock },
     { provide: 'isAuthenticated', useValue: tokenNotExpired },
     {
       provide: AuthService,
       useClass: AuthService,
-      deps: [
-        'window',
-        'Auth0Lock',
-        'isAuthenticated',
-      ],
+      deps: ['Window', 'Auth0Lock', 'isAuthenticated'],
     },
     { provide: AuthHttp, useFactory: authHttpFactory, deps: [Http, RequestOptions] },
   ],

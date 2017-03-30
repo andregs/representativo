@@ -23,7 +23,7 @@ export class AuthService {
   private readonly isAuthenticated: () => boolean;
 
   constructor(
-    @Inject('window') window: any,
+    @Inject('Window') window: any,
     @Inject('Auth0Lock') Auth0Lock: any,
     @Inject('isAuthenticated') isAuthenticated: any,
   ) {

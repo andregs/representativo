@@ -1,5 +1,6 @@
 [![Bate-Papo](https://badges.gitter.im/andregs/representativo.svg)](https://gitter.im/representativo)
 [![Build Status](https://travis-ci.org/andregs/representativo.svg?branch=master)](https://travis-ci.org/andregs/representativo)
+[![codecov](https://codecov.io/gh/andregs/representativo/branch/master/graph/badge.svg)](https://codecov.io/gh/andregs/representativo)
 [![dependency Status](https://david-dm.org/andregs/representativo/status.svg)](https://david-dm.org/andregs/representativo)
 [![devDependencies Status](https://david-dm.org/andregs/representativo/dev-status.svg)](https://david-dm.org/andregs/representativo?type=dev)
 

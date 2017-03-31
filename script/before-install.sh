@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu
 
+# Instala o cliente p/ codecov.io
+npm install -g codecov
+
 # Instala o ArangoDB
 echo arangodb3 arangodb3/password password root | sudo debconf-set-selections
 echo arangodb3 arangodb3/password_again password root | sudo debconf-set-selections

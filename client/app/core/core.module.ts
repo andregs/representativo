@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
 
@@ -21,6 +22,7 @@ export function getAuth0Lock() { return Auth0Lock; }
   imports: [
     SharedModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
   ],
   declarations: [LoginComponent, ToolbarComponent],

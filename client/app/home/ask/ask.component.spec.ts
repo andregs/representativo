@@ -22,14 +22,14 @@ describe('AskComponent', function () {
 
   it('should refuse an invalid question', function () {
     const component = this.component as AskComponent;
-    component.qForm.valid = false;
+    (component.qForm as any).valid = false;
     component.onAsk();
     expect(component.step).toBe('asking');
   });
 
   it('should accept a valid question', function () {
     const component = this.component as AskComponent;
-    component.qForm.valid = true;
+    (component.qForm as any).valid = true;
     component.onAsk();
     expect(component.step).toBe('answering');
   });
@@ -37,7 +37,7 @@ describe('AskComponent', function () {
   it('should refuse an invalid answer', function () {
     const component = this.component as AskComponent;
     const service = this.service as QuestionService;
-    component.aForm.valid = false;
+    (component.aForm as any).valid = false;
     component.onAnswer();
     expect(service.ask).not.toHaveBeenCalled();
   });
@@ -45,8 +45,8 @@ describe('AskComponent', function () {
   it('should submit valid q & a', function () {
     const component = this.component as AskComponent;
     const service = this.service as QuestionService;
-    component.qForm.valid = true;
-    component.aForm.valid = true;
+    (component.qForm as any).valid = true;
+    (component.aForm as any).valid = true;
     component.onAnswer();
     expect(service.ask).toHaveBeenCalled();
   });

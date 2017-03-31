@@ -26,6 +26,7 @@
     "ordered-imports": [false],
     "prefer-const": true,
     "quotemark": [false],
+    "space-before-function-paren": false,
     "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": [false]

@@ -1,15 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Escolha um tema base
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
-// @import '~@angular/material/core/theming/prebuilt/indigo-pink';
-// @import '~@angular/material/core/theming/prebuilt/pink-bluegrey';
-// @import '~@angular/material/core/theming/prebuilt/purple-green';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber';
+// @import '~@angular/material/prebuilt-themes/indigo-pink';
+// @import '~@angular/material/prebuilt-themes/pink-bluegrey';
+// @import '~@angular/material/prebuilt-themes/purple-green';
 
 @import 'app/shared/variables';
 
 html {
   box-sizing: border-box;
+  margin: 0;
 }
 
 *, *:before, *:after {
@@ -19,6 +20,7 @@ html {
 
 body {
   background-color: #eea;
+  margin: 0;
 }
 
 a {

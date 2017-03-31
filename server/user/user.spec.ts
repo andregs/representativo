@@ -7,7 +7,7 @@ describe('User', function() {
     const json = {
       username: 'a',
       user_id: 'b',
-      email_verified: 1,
+      email_verified: true,
       created_at: (new Date()).toISOString(),
       updated_at: (new Date()).toISOString(),
       name: 'foo',

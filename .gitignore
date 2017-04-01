@@ -29,7 +29,7 @@
 /.nyc_output
 /libpeerconnection.log
 npm-debug.log*
-testem.log
+debug.log
 /typings
 
 # e2e

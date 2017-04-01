@@ -9,12 +9,22 @@ addons:
   ssh_known_hosts:
   - representativo.org
   - 45.55.142.185 # representativo.org
+  hosts:
+    representativo
+  sauce_connect:
+    username: andregs
+  jwt:
+    secure: YmYvM9NAMq/JRHx3qrlZc8Pf6W5Nu82gQZiT2QGZgPGQMwAGKU8CP/65bjP1n0PpKRsX1uV7sZlGFW1+GlqZKdPM5JRtYyR166fuOqMKVqKofY9tb7ZfenhUe+CSJBeH84e4TKdIV8luivBXWX+4WwH4T0N0+FwoWSujW92Z93eKyISKoHv6DKg2goo0wbeejNH/FF9sx4CqNTKmJj4rc6gXj5GscJvxEmBu68lUmwxqa0VpkqmO5q52YAek7KnSa0vrT2RGADEx5oHdpVrHX101yyVq9H0YSb4Zym6DOOh+/3KfOBs1h+0yor2uSx9JCvKjpsPaYlQNNFpoNmxopSDIhsl5fWr0ygRKX0M7TwzGQubaZrW4PYcdGrhgdJo5NCpmOSaBlufe08st5JdZNbDQe6CldscdV5lkuC8D6PvORpFGXmk0HPS5MhPwhsuNulvS2xqmXHynLMZIT4TNuPrKio0c2Mh3lJwQ6BEipp2FoBjYVDXu/np6GX6Dt7Moht8HkAqtwuBJVgy8MhTSgGVKLblzaRFQmZOP8ayi3KKfbYTzv4eFiXzATNDXMOGNNttHiExYZE+QpYh0nahcWgNud2WmfuPeR4ijf8aqEMtH4p79PNT+22RJHSlhqg9WmS+dj2NORt2TIoxm3Gc/qXlaLRj4fiX1G/EQsQpTDP4=
 before_install:
 - "./script/before-install.sh"
 script:
 - npm run -s db:create
 - npm run -s build-prod
 - npm test
+- nohup bash -c "npm start &"
+- sleep 7
+- cat nohup.out
+- npm run e2e
 after_success: npm run coverage
 deploy:
   skip_cleanup: true

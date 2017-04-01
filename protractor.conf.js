@@ -8,7 +8,7 @@ exports.config = {
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
-  directConnect: process.env.CI !== true,
+  directConnect: (process.env.CI !== 'true'),
   // seleniumAddress: 'http://localhost:4444/wd/hub',
   multiCapabilities: [
     {

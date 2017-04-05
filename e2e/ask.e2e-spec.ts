@@ -1,4 +1,4 @@
-// import { browser, ExpectedConditions as EC, until } from 'protractor';
+import { browser, until, by } from 'protractor';
 import { HomePO } from './po/home.po';
 import Question from '../server/qa/question';
 
@@ -43,10 +43,9 @@ describe('Ask Component', function() {
   it('should request the answer after a valid question is submitted', async function() {
     await home.askComponent.getOptionA().clear();
     await home.askComponent.setOptions(question.options[0], question.options[1]);
+    const formIsValid = until.elementLocated(by.css('#qForm.ng-valid'));
+    await browser.driver.wait(formIsValid, 3000);
     await home.askComponent.getSubmitButton().click();
-
-    // await browser.driver.wait(until.elementLocated('#aForm md-card-title'), 5000);
-    // await browser.wait(EC.visibilityOf(title), 5000);
 
     expect(await home.answerComponent.getTitle().getText()).toBe(question.title);
     expect(await home.answerComponent.getOptionLabel(0).getText()).toMatch(question.options[0]);

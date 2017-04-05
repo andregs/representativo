@@ -45,7 +45,7 @@ if (process.env.CI === 'true') {
   exports.config.multiCapabilities.forEach(cap => {
     cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
     cap.build = process.env.TRAVIS_JOB_ID;
-    // cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
+    cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
     cap.tags = ['travis'];
   });
 

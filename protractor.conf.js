@@ -8,10 +8,11 @@ exports.config = {
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
-  directConnect: (process.env.CI !== 'true'),
+  directConnect: false,
   multiCapabilities: [
     { browserName: 'chrome', version: '56.0', platform: 'Windows 10' },
   ],
+  maxSessions: 1,
   baseUrl: `http://${process.env.CI ? 'representativo' : 'localhost'}:3000/`,
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -26,41 +27,28 @@ exports.config = {
   }
 };
 
+const browsers = [{
+  browserName: 'MicrosoftEdge',
+  platform: 'Windows 10',
+  version: '14.14393',
+// }, {
+//   browserName: 'internet explorer',
+//   platform: 'Windows 7',
+//   version: '11.0',
+}];
+
+browsers.forEach(b => {
+  exports.config.multiCapabilities.push(b);
+});
+
 if (process.env.CI === 'true') {
-  const browsers = [{
-    browserName: 'firefox',
-    version: '52.0',
-    platform: 'Windows 10',
-  }, {
-    browserName: 'MicrosoftEdge',
-    platform: 'Windows 10',
-    version: '14.14393',
-  }, {
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '11.0',
-  }, {
-    browserName: 'chrome',
-    platform: 'Linux',
-    version: '48.0',
-  }, {
-    browserName: 'safari',
-    platform: 'macOS 10.12',
-    version: '10.0',
-  }, {
-    browserName: 'chrome',
-    platform: 'macOS 10.12',
-    version: '56.0',
-  }];
-
-  browsers.forEach(b => {
-    exports.config.multiCapabilities.push(b);
-  });
-
   exports.config.multiCapabilities.forEach(cap => {
     cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
     cap.build = process.env.TRAVIS_BUILD_NUMBER;
     cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
     cap.tags = ['travis'];
   });
+
+} else {
+  exports.config.seleniumAddress = 'http://localhost:4444/wd/hub';
 }

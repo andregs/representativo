@@ -5,6 +5,8 @@ import { ToolbarPO } from './po/toolbar.po';
 beforeAll(async function () {
   const login = new LoginPO();
   await login.navigateTo();
+  await browser.driver.manage().deleteAllCookies();
+  await login.navigateTo();
   await login.login();
   this.login = login;
   this.toolbar = new ToolbarPO();
@@ -33,8 +35,8 @@ describe('Login Route', function () {
 
   it('should login the user', async function () {
     await login.reLogin();
-    expect(await toolbar.profileIcon).toBe('person');
-    expect(await toolbar.logoutIcon).toBe('power_settings_new');
+    expect(await toolbar.profileIcon).toMatch('person');
+    expect(await toolbar.logoutIcon).toMatch('power_settings_new');
   });
 
   it('should redirect the user after login', async function () {

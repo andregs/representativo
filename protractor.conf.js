@@ -42,7 +42,7 @@ browsers.forEach(b => {
 if (process.env.CI === 'true') {
   exports.config.sauceUser = process.env.SAUCE_USERNAME;
   exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
-  exports.config.sauceBuild = process.env.TRAVIS_BUILD_NUMBER;
+  exports.config.sauceBuild = `Travis #${process.env.TRAVIS_BUILD_NUMBER}`;
   exports.config.multiCapabilities.forEach(cap => {
     cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
     cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;

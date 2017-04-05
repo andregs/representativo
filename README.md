@@ -19,3 +19,7 @@ Interessado?
 Entre em contato pelo [bate-papo](https://gitter.im/representativo/Lobby) ou siga o andamento do projeto
 no [Workflowy](https://workflowy.com/s/G_t9.ayAxEKW9Ag)!
 - Estágio atual: nem mesmo alfa.
+
+### Testado em:
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/andregs.svg)](https://saucelabs.com/u/andregs)

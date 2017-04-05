@@ -14,20 +14,23 @@ export class LoginPO {
 
   async login() {
     const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
-    const username = await browser.driver.wait(usernameIsLocated, 10000);
-    await browser.driver.wait(until.elementIsVisible(username), 10000);
-    await $('input[name=username]').sendKeys(process.env.TEST_USERNAME);
-    await $('input[name=password]').sendKeys(process.env.TEST_PASSWORD);
-    await $('button[type=submit]').click();
-    // We know login is done when the logout button appears
-    return browser.driver.wait(until.elementLocated(by.id('logoutButton')), 10000);
-  }
-
-  async reLogin() {
+    const username = browser.driver.wait(usernameIsLocated, 10000);
     const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
-    const button = await browser.driver.wait(loginButtonIsLocated, 10000);
-    await button.click();
-    // We know login is done when the logout button appears
+    const button = browser.driver.wait(loginButtonIsLocated, 10000);
+
+    const element = await Promise.race([username, button]);
+    if (await element.getTagName() === 'input') {
+      // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
+      await browser.driver.wait(until.elementIsVisible(element), 5000);
+      await $('input[name=username]').sendKeys(process.env.TEST_USERNAME);
+      await $('input[name=password]').sendKeys(process.env.TEST_PASSWORD);
+      await $('button[type=submit]').click();
+    } else {
+      // mas às vezes ele exige apenas que vc clique num botão p/ repetir o último login
+      await element.click();
+    }
+
+    // sabemos que o login acabou quando aparecer o botão de logout
     return browser.driver.wait(until.elementLocated(by.id('logoutButton')), 10000);
   }
 

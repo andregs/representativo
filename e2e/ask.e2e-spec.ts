@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions as EC } from 'protractor';
+// import { browser, ExpectedConditions as EC, until } from 'protractor';
 import { HomePO } from './po/home.po';
 import Question from '../server/qa/question';
 
@@ -45,10 +45,10 @@ describe('Ask Component', function() {
     await home.askComponent.setOptions(question.options[0], question.options[1]);
     await home.askComponent.getSubmitButton().click();
 
-    const title = home.answerComponent.getTitle();
-    await browser.wait(EC.visibilityOf(title), 5000);
+    // await browser.driver.wait(until.elementLocated('#aForm md-card-title'), 5000);
+    // await browser.wait(EC.visibilityOf(title), 5000);
 
-    expect(await title.getText()).toBe(question.title);
+    expect(await home.answerComponent.getTitle().getText()).toBe(question.title);
     expect(await home.answerComponent.getOptionLabel(0).getText()).toMatch(question.options[0]);
     expect(await home.answerComponent.getOptionLabel(1).getText()).toMatch(question.options[1]);
     expect(await home.answerComponent.isFormValid()).toBeFalsy('should not have an answer yet');

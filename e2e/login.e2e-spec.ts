@@ -34,7 +34,7 @@ describe('Login Route', function () {
   });
 
   it('should login the user', async function () {
-    await login.reLogin();
+    await login.login();
     expect(await toolbar.profileIcon).toMatch('person');
     expect(await toolbar.logoutIcon).toMatch('power_settings_new');
   });

@@ -10,7 +10,7 @@ exports.config = {
   multiCapabilities: [
     { browserName: 'chrome', version: '56.0', platform: 'Windows 10' },
   ],
-  maxSessions: 1,
+  maxSessions: process.env.CI ? 5 : 1,
   baseUrl: `http://${process.env.CI ? 'representativo' : 'localhost'}:3000/`,
   framework: 'jasmine',
   jasmineNodeOpts: {

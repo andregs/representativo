@@ -2,8 +2,6 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 exports.config = {
-  sauceUser: process.env.SAUCE_USERNAME,
-  sauceKey: process.env.SAUCE_ACCESS_KEY,
   allScriptsTimeout: 11000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
@@ -42,9 +40,11 @@ browsers.forEach(b => {
 });
 
 if (process.env.CI === 'true') {
+  exports.config.sauceUser = process.env.SAUCE_USERNAME;
+  exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+  exports.config.sauceBuild = process.env.TRAVIS_BUILD_NUMBER;
   exports.config.multiCapabilities.forEach(cap => {
     cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
-    cap.build = process.env.TRAVIS_JOB_ID;
     cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
     cap.tags = ['travis'];
   });

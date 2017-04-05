@@ -4,6 +4,8 @@
 [![dependency Status](https://david-dm.org/andregs/representativo/status.svg)](https://david-dm.org/andregs/representativo)
 [![devDependencies Status](https://david-dm.org/andregs/representativo/dev-status.svg)](https://david-dm.org/andregs/representativo?type=dev)
 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/andregs.svg)](https://saucelabs.com/u/andregs)
+
 # Representativo
 
 | README | [Modelo de Dados](./doc/modelo-dados.md) | [Referência da API](./doc/referencia-api.md) |
@@ -19,7 +21,3 @@ Interessado?
 Entre em contato pelo [bate-papo](https://gitter.im/representativo/Lobby) ou siga o andamento do projeto
 no [Workflowy](https://workflowy.com/s/G_t9.ayAxEKW9Ag)!
 - Estágio atual: nem mesmo alfa.
-
-### Testado em:
-
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/andregs.svg)](https://saucelabs.com/u/andregs)

@@ -128,7 +128,7 @@ export class AuthService {
   private protectStorage(window: Window) {
     Observable.fromEvent<StorageEvent>(window, 'storage')
       .filter(event => ['accessToken', 'id_token'].some(
-        key => event.key === key && event.oldValue !== null,
+        key => event.key === key && !!event.oldValue,
       ))
       .subscribe(() => this.logout());
     return window.localStorage;

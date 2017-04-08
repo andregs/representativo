@@ -23,24 +23,32 @@ describe('Login Route', function () {
 
   it('should not be authenticated yet', async function () {
     await toolbar.logout();
-    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + login.url);
-    expect(await toolbar.logoutElm.isPresent()).toBeFalsy();
-    expect(await toolbar.profileElm.isPresent()).toBeFalsy();
+    expect(await browser.getCurrentUrl())
+      .toEqual(browser.baseUrl + login.url);
+    expect(await toolbar.logoutElm.isPresent())
+      .toBeFalsy();
+    expect(await toolbar.profileElm.isPresent())
+      .toBeFalsy();
   });
 
   it('should have the proper logo & subtitle', async function () {
-    expect(await toolbar.logoText).toBe('Representativo');
-    expect(await login.subtitle).toMatch(/Bem-vindo ao Representativo/);
+    expect(await toolbar.logoText)
+      .toBe('Representativo');
+    expect(await login.subtitle)
+      .toMatch(/Bem-vindo ao Representativo/);
   });
 
   it('should login the user', async function () {
     await login.login();
-    expect(await toolbar.profileIcon).toMatch('person');
-    expect(await toolbar.logoutIcon).toMatch('power_settings_new');
+    expect(await toolbar.profileIcon)
+      .toMatch('person');
+    expect(await toolbar.logoutIcon)
+      .toMatch('power_settings_new');
   });
 
   it('should redirect the user after login', async function () {
-    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl);
+    expect(await browser.getCurrentUrl())
+      .toEqual(browser.baseUrl);
   });
 
 });

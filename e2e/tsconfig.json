@@ -3,12 +3,11 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es6", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "../dist/public/out-tsc-e2e",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es2015",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "typeRoots": [

@@ -1,6 +1,6 @@
 import { browser, until, by } from 'protractor';
-import { HomePO } from './po/home.po';
 import Question from '../server/qa/question';
+import { HomePO } from './po/home.po';
 
 describe('Ask Component', function() {
 
@@ -17,15 +17,20 @@ describe('Ask Component', function() {
   });
 
   it('should display the ask form', async function() {
-    expect(await home.askComponent.getFormTitle().getText()).toMatch(/Faça uma nova pergunta/);
-    expect(await home.askComponent.getOptionA().isPresent()).toBeFalsy('should not request the options yet');
-    expect(await home.answerComponent.getTitle().isPresent()).toBeFalsy('should not display the answer form yet');
+    expect(await home.askComponent.getFormTitle().getText())
+      .toMatch(/Faça uma nova pergunta/);
+    expect(await home.askComponent.getOptionA().isPresent())
+      .toBeFalsy('should not request the options yet');
+    expect(await home.answerComponent.getTitle().isPresent())
+      .toBeFalsy('should not display the answer form yet');
   });
 
   it('should request the options after typing the title', async function() {
     await home.askComponent.setTitle(question.title);
-    expect(await home.askComponent.getOptionA().isDisplayed()).toBeTruthy('should request the options');
-    expect(await home.answerComponent.getTitle().isPresent()).toBeFalsy('should not display the answer form yet');
+    expect(await home.askComponent.getOptionA().isDisplayed())
+      .toBeTruthy('should request the options');
+    expect(await home.answerComponent.getTitle().isPresent())
+      .toBeFalsy('should not display the answer form yet');
   });
 
   it('should not accept submission of an invalid question', async function() {
@@ -37,7 +42,8 @@ describe('Ask Component', function() {
     ]);
     expect(classes[0].split(' ')).toContain('ng-invalid');
     expect(classes[1].split(' ')).toContain('ng-invalid');
-    expect(await home.answerComponent.getTitle().isPresent()).toBeFalsy('should not display the answer form yet');
+    expect(await home.answerComponent.getTitle().isPresent())
+      .toBeFalsy('should not display the answer form yet');
   });
 
   it('should request the answer after a valid question is submitted', async function() {
@@ -47,16 +53,22 @@ describe('Ask Component', function() {
     await browser.driver.wait(formIsValid, 3000);
     await home.askComponent.getSubmitButton().click();
 
-    expect(await home.answerComponent.getTitle().getText()).toBe(question.title);
-    expect(await home.answerComponent.getOptionLabel(0).getText()).toMatch(question.options[0]);
-    expect(await home.answerComponent.getOptionLabel(1).getText()).toMatch(question.options[1]);
-    expect(await home.answerComponent.isFormValid()).toBeFalsy('should not have an answer yet');
+    expect(await home.answerComponent.getTitle().getText())
+      .toBe(question.title);
+    expect(await home.answerComponent.getOptionLabel(0).getText())
+      .toMatch(question.options[0]);
+    expect(await home.answerComponent.getOptionLabel(1).getText())
+      .toMatch(question.options[1]);
+    expect(await home.answerComponent.isFormValid())
+      .toBeFalsy('should not have an answer yet');
   });
 
   it('should not accept submission of an invalid answer', async function () {
-    expect(await home.answerComponent.isFormValid()).toBeFalsy('should not have an answer yet');
+    expect(await home.answerComponent.isFormValid())
+      .toBeFalsy('should not have an answer yet');
     await home.answerComponent.getSubmitButton().click();
-    expect(await home.answerComponent.isFormValid()).toBeFalsy('still no answer');
+    expect(await home.answerComponent.isFormValid())
+      .toBeFalsy('still no answer');
   });
 
   it('should save the new q & a', async function() {
@@ -66,7 +78,8 @@ describe('Ask Component', function() {
     expect(expected).toBe(actual);
     await home.answerComponent.getOpinion().sendKeys('my opinion');
     await home.answerComponent.getSubmitButton().click();
-    expect(await home.askComponent.getFormTitle().getText()).toMatch(/Faça uma nova pergunta/);
+    expect(await home.askComponent.getFormTitle().getText())
+      .toMatch(/Faça uma nova pergunta/);
   });
 
 });

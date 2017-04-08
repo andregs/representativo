@@ -10,12 +10,14 @@ describe('Toolbar Component', function () {
 
   it('should browse to the user profile', async function () {
     await page.goToProfile();
-    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl + "perfil");
+    expect(await browser.getCurrentUrl())
+      .toEqual(browser.baseUrl + "perfil");
   });
 
   it('should browse to the home page', async function () {
     await page.goToHome();
-    expect(await browser.getCurrentUrl()).toEqual(browser.baseUrl);
+    expect(await browser.getCurrentUrl())
+      .toEqual(browser.baseUrl);
   });
 
 });

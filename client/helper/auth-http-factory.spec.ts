@@ -1,7 +1,7 @@
 
 import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
-import factory from './auth-http-factory';
+import { authHttpFactory as factory } from './auth-http-factory';
 
 describe('authHttpFactory', function () {
 

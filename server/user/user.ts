@@ -1,7 +1,7 @@
 import { autoserialize, autoserializeAs } from 'cerialize';
 
 /** Representa um usuário da aplicação. */
-export default class User {
+export class User {
 
   @autoserialize readonly _key: string;
   @autoserialize readonly _rev: string;

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { json } from 'body-parser';
-import createDatabase from '../db';
-import jwtChecker from '../user/jwt-checker.handler';
+import { createDatabase } from '../db';
+import { jwtChecker } from '../user/jwt-checker.handler';
 import * as jwt from 'jsonwebtoken';
 
 import { config } from '../../app-config';

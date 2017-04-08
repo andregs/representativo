@@ -1,8 +1,8 @@
-import questionEndpoint from './question.endpoint';
+import {questionEndpoint} from './question.endpoint';
 import { Database } from 'arangojs';
 import * as ask from './ask.model';
 import * as request from 'supertest';
-import ModelError from '../shared/model-error';
+import {ModelError} from '../shared/model-error';
 
 describe('Question Endpoint', function () {
 

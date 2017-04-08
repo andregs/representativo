@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import Auth0Lock from 'auth0-lock';
 
-import authHttpFactory from '../../helper/auth-http-factory';
+import { authHttpFactory } from '../../helper/auth-http-factory';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';

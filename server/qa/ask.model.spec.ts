@@ -1,9 +1,9 @@
 import { repeat } from 'lodash';
 
-import Question from './question';
-import Answer from './answer';
+import { Question } from './question';
+import { Answer } from './answer';
 import ask from './ask.model';
-import ModelError from '../shared/model-error';
+import { ModelError } from '../shared/model-error';
 
 describe('Ask Model', function () {
 

@@ -3,8 +3,8 @@ import { AuthHttp } from 'angular2-jwt';
 import { Serialize } from 'cerialize';
 import { Observable } from 'rxjs/Observable';
 
-import Question from '../../../server/qa/question';
-import Answer from '../../../server/qa/answer';
+import { Question } from '../../../server/qa/question';
+import { Answer } from '../../../server/qa/answer';
 
 /**
  * Este serviço permite a criação de novas perguntas.

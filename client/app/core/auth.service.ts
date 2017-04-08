@@ -8,7 +8,7 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/filter';
 
 import { config } from '../../../app-config';
-import User from '../../../server/user/user';
+import { User } from '../../../server/user/user';
 
 /**
  * Gerencia o login & logout no Auth0 e disponibiliza o usuário autenticado.

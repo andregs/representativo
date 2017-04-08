@@ -1,7 +1,7 @@
 import { Database } from 'arangojs';
-import Question from './question';
-import Answer from './answer';
-import ModelError from '../shared/model-error';
+import { Question } from './question';
+import { Answer } from './answer';
+import { ModelError } from '../shared/model-error';
 
 /**
  * Salva uma nova pergunta na base de dados.

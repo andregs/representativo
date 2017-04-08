@@ -6,7 +6,7 @@ import { config } from '../../app-config';
 /**
  * Este middleware garante que a API seja acessível apenas por usuários autenticados.
  */
-function jwtChecker(express: Express) {
+export function jwtChecker(express: Express) {
   express.use(
     '/api/*',
     jwt({
@@ -16,5 +16,3 @@ function jwtChecker(express: Express) {
     }),
   );
 }
-
-export default jwtChecker;

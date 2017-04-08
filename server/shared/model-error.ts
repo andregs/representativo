@@ -1,5 +1,5 @@
 
-export default class ModelError extends Error {
+export class ModelError extends Error {
   statusCode: number;
   name = 'ModelError';
 

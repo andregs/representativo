@@ -1,13 +1,13 @@
 import { browser, until, by } from 'protractor';
-import Question from '../server/qa/question';
+import { Question } from '../server/qa/question';
 import { HomePO } from './po/home.po';
 
-describe('Ask Component', function() {
+describe('Ask Component', function () {
 
   let home: HomePO;
   let question: Question;
 
-  beforeAll(async function() {
+  beforeAll(async function () {
     home = new HomePO();
     await home.navigateTo();
     question = new Question();
@@ -16,7 +16,7 @@ describe('Ask Component', function() {
     question.options[1] = 'bbb';
   });
 
-  it('should display the ask form', async function() {
+  it('should display the ask form', async function () {
     expect(await home.askComponent.getFormTitle().getText())
       .toMatch(/Faça uma nova pergunta/);
     expect(await home.askComponent.getOptionA().isPresent())
@@ -25,7 +25,7 @@ describe('Ask Component', function() {
       .toBeFalsy('should not display the answer form yet');
   });
 
-  it('should request the options after typing the title', async function() {
+  it('should request the options after typing the title', async function () {
     await home.askComponent.setTitle(question.title);
     expect(await home.askComponent.getOptionA().isDisplayed())
       .toBeTruthy('should request the options');
@@ -33,7 +33,7 @@ describe('Ask Component', function() {
       .toBeFalsy('should not display the answer form yet');
   });
 
-  it('should not accept submission of an invalid question', async function() {
+  it('should not accept submission of an invalid question', async function () {
     await home.askComponent.setOptions('aa', '');
     await home.askComponent.getSubmitButton().click();
     const classes = await Promise.all([
@@ -46,7 +46,7 @@ describe('Ask Component', function() {
       .toBeFalsy('should not display the answer form yet');
   });
 
-  it('should request the answer after a valid question is submitted', async function() {
+  it('should request the answer after a valid question is submitted', async function () {
     await home.askComponent.getOptionA().clear();
     await home.askComponent.setOptions(question.options[0], question.options[1]);
     const formIsValid = until.elementLocated(by.css('#qForm.ng-valid'));
@@ -71,7 +71,7 @@ describe('Ask Component', function() {
       .toBeFalsy('still no answer');
   });
 
-  it('should save the new q & a', async function() {
+  it('should save the new q & a', async function () {
     await home.answerComponent.getOptions().get(1).click();
     const expected = await home.answerComponent.getChosenAnswer().getText();
     const actual = await home.answerComponent.getOptionLabel(1).getText();

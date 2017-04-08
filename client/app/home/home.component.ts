@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
-import User from '../../../server/user/user';
+import { User } from '../../../server/user/user';
 
 @Component({
   selector: 're-home',

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import Question from '../../../../server/qa/question';
-import Answer from '../../../../server/qa/answer';
+import { Question } from '../../../../server/qa/question';
+import { Answer } from '../../../../server/qa/answer';
 import { QuestionService } from '../question.service';
 
 /**

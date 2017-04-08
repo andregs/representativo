@@ -1,9 +1,9 @@
 import { DeserializeKeysFrom, Deserialize } from 'cerialize';
-import User from './user';
+import { User } from './user';
 
-describe('User', function() {
+describe('User', function () {
 
-  it('should translate Auth0 keys', function() {
+  it('should translate Auth0 keys', function () {
     const json = {
       username: 'a',
       user_id: 'b',

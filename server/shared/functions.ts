@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import ModelError from './model-error';
+import { ModelError } from './model-error';
 
 export function sendError(error: ModelError, response: Response) {
   response

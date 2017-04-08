@@ -1,5 +1,5 @@
 import { Database } from 'arangojs';
-import User from '../user';
+import { User } from '../user';
 
 /**
  * Cadastra um novo usuário no app.

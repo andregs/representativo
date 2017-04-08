@@ -1,9 +1,9 @@
 import * as request from 'supertest';
 import * as signup from './signup.model';
-import signupEndpoint from './signup.endpoint';
+import { signupEndpoint } from './signup.endpoint';
 import { Database } from 'arangojs';
 import { Serialize } from 'cerialize';
-import User from '../user';
+import { User } from '../user';
 
 describe('Signup Endpoint', function () {
 

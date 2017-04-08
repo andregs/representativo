@@ -1,9 +1,9 @@
 import signup from './signup.model';
-import User from '../user';
+import { User } from '../user';
 
 describe('Signup Model', function () {
 
-  beforeEach(function(){
+  beforeEach(function () {
     const user = new User('huvs', process.env.TEST_USER_ID);
     user.email = 'huvs@example.com';
     this.user = user;

@@ -13,7 +13,7 @@ import { sendError } from '../../shared/functions';
  * POST /api/user/signup
  * { "_key": "andre", "name": "André Gomes" ... }
  */
-function signupEndpoint(express: Express, db: Database) {
+export function signupEndpoint(express: Express, db: Database) {
 
   const base = '/api/user';
 
@@ -33,5 +33,3 @@ function signupEndpoint(express: Express, db: Database) {
     });
 
 }
-
-export default signupEndpoint;

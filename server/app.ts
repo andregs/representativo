@@ -3,10 +3,10 @@ import { static as _static } from 'express';
 import { join } from 'path';
 import { Server } from 'http';
 import { json } from 'body-parser';
-import signupEndpoint from './user/signup/signup.endpoint';
+import { signupEndpoint } from './user/signup/signup.endpoint';
 import { Database } from 'arangojs';
-import jwtChecker from './user/jwt-checker.handler';
-import questionEndpoint from './qa/question.endpoint';
+import { jwtChecker } from './user/jwt-checker.handler';
+import { questionEndpoint } from './qa/question.endpoint';
 
 /**
  * Classe que define o servidor web da nossa aplicação.

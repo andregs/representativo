@@ -2,8 +2,8 @@ import { Express, Request, Response } from 'express';
 import { Database } from 'arangojs';
 import ask from './ask.model';
 import { sendError } from '../shared/functions';
-import Question from './question';
-import Answer from './answer';
+import { Question } from './question';
+import { Answer } from './answer';
 import { GenericDeserialize as Deserialize } from 'cerialize';
 
 /**
@@ -24,7 +24,7 @@ import { GenericDeserialize as Deserialize } from 'cerialize';
  * }
  * ```
  */
-function questionEndpoint(express: Express, db: Database) {
+export function questionEndpoint(express: Express, db: Database) {
 
   const base = '/api/question';
 
@@ -41,5 +41,3 @@ function questionEndpoint(express: Express, db: Database) {
       }
     });
 }
-
-export default questionEndpoint;

@@ -1,10 +1,10 @@
 import { autoserialize, deserializeAs } from 'cerialize';
 import { inRange, trim } from 'lodash';
 
-import User from '../user/user';
+import { User } from '../user/user';
 
 /** Representa uma pergunta. */
-export default class Question {
+export class Question {
 
   @autoserialize readonly _key: string;
   @autoserialize readonly _rev: string;

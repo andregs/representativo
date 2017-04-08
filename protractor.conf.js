@@ -17,6 +17,10 @@ exports.config = {
     defaultTimeoutInterval: 2 * 60 * 1000
   },
   SELENIUM_PROMISE_MANAGER: false,
+  plugins: [{
+    package: 'protractor-console',
+    logLevels: ['info', 'warning', 'severe'],
+  }],
   onPrepare: function () {
     require('ts-node').register({
       project: 'e2e'

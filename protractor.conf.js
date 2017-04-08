@@ -35,14 +35,6 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
     {
       browserName: 'Browser',
       platformName: 'Android',
-      platformVersion: '6.0',
-      deviceName: 'Android Emulator',
-      deviceOrientation: 'portrait',
-      recordScreenshots: false,
-    },
-    {
-      browserName: 'Browser',
-      platformName: 'Android',
       platformVersion: '4.4',
       deviceName: 'Android Emulator',
       deviceOrientation: 'portrait',
@@ -51,7 +43,7 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
     {
       browserName: 'Safari',
       platformName: 'iOS',
-      platformVersion: '10.2',
+      platformVersion: '9.3',
       deviceName: 'iPhone Simulator',
       deviceOrientation: 'portrait',
       recordScreenshots: false,

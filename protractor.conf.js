@@ -54,15 +54,7 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
       deviceName: 'iPhone Simulator',
       deviceOrientation: 'portrait',
       recordScreenshots: false,
-    },
-    {
-      browserName: 'Safari',
-      platformName: 'iOS',
-      platformVersion: '9.3',
-      deviceName: 'iPhone Simulator',
-      deviceOrientation: 'portrait',
-      recordScreenshots: false,
-    },
+    }
   ];
 
   browsers.forEach(b => {

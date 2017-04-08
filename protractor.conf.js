@@ -10,9 +10,7 @@ exports.config = {
   multiCapabilities: [
     { browserName: 'chrome', version: '56.0', platform: 'Windows 10' },
   ],
-  maxSessions: process.env.CI ? 5 : 1,
-  // baseUrl: `http://representativo/`,
-  baseUrl: `http://${process.env.CI ? 'representativo' : 'localhost'}:3000/`,
+  maxSessions: 5,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -26,36 +24,38 @@ exports.config = {
   }
 };
 
-const browsers = [
-  { browserName: 'MicrosoftEdge',     platform: 'Windows 10',  version: '14.14393' },
-  { browserName: 'chrome',            platform: 'Linux',       version: '48.0' },
-  { browserName: 'firefox',           platform: 'Windows 7',   version: '47.0' },
-  // { browserName: 'safari',            platform: 'macOS 10.12', version: '10.0' },
-  // { browserName: 'internet explorer', platform: 'Windows 7',   version: '11.0', requireWindowFocus: true },
-];
+if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
+  const browsers = [
+    { browserName: 'MicrosoftEdge',     platform: 'Windows 10',  version: '14.14393' },
+    { browserName: 'chrome',            platform: 'Linux',       version: '48.0' },
+    { browserName: 'firefox',           platform: 'Windows 7',   version: '47.0' },
+    // { browserName: 'safari',            platform: 'macOS 10.12', version: '10.0' },
+    // { browserName: 'internet explorer', platform: 'Windows 7',   version: '11.0', requireWindowFocus: true },
+  ];
 
-browsers.forEach(b => {
-  exports.config.multiCapabilities.push(b);
-});
-
-// function now() {
-//   const d = new Date();
-//   return d.toISOString().substr(0, 14) + (d.getMinutes() < 30 ? '00' : '30');
-// }
-
-// exports.config.sauceUser = process.env.SAUCE_USERNAME;
-// exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
-// exports.config.sauceBuild = `Local ` + now();
-if (process.env.CI === 'true') {
-  exports.config.sauceUser = process.env.SAUCE_USERNAME;
-  exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
-  exports.config.sauceBuild = `Travis #${process.env.TRAVIS_BUILD_NUMBER}`;
-  exports.config.multiCapabilities.forEach(cap => {
-    cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
-    cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
-    cap.tags = ['travis'];
+  browsers.forEach(b => {
+    exports.config.multiCapabilities.push(b);
   });
 
+  exports.config.baseUrl = `http://representativo:3000/`;
+  exports.config.sauceUser = process.env.SAUCE_USERNAME;
+  exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+
+  if (process.env.SAUCE === 'true') {
+    exports.config.sauceBuild = `Local `
+      + new Date().toISOString().substr(0, 14)
+      + (new Date().getMinutes() < 30 ? '00' : '30');
+
+  } else if (process.env.CI === 'true') {
+    exports.config.sauceBuild = `Travis #${process.env.TRAVIS_BUILD_NUMBER}`;
+    exports.config.multiCapabilities.forEach(cap => {
+      cap.name = `Travis #${process.env.TRAVIS_JOB_NUMBER}`;
+      cap["tunnel-identifier"] = process.env.TRAVIS_JOB_NUMBER;
+      cap.tags = ['travis'];
+    });
+  }
+
 } else {
-  exports.config.seleniumAddress = 'http://localhost:4444/wd/hub';
+  exports.config.baseUrl = `http://localhost:3000/`;
+  exports.config.directConnect = true;
 }

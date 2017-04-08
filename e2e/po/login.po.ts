@@ -32,7 +32,7 @@ export class LoginPO {
 
     // sabemos que o login acabou quando aparecer o botão de logout
     // e quando aparecer o título do form de criar pergunta
-    return browser.driver.wait(
+    return await browser.driver.wait(
       EC.and(
         EC.elementToBeClickable($('#logoutButton')),
         EC.visibilityOf($('#qForm md-card-subtitle')),

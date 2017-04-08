@@ -5,8 +5,6 @@ import { ToolbarPO } from './po/toolbar.po';
 beforeAll(async function () {
   const login = new LoginPO();
   await login.navigateTo();
-  await browser.driver.manage().deleteAllCookies();
-  await login.navigateTo();
   await login.login();
   this.login = login;
   this.toolbar = new ToolbarPO();

@@ -1,4 +1,4 @@
-import { $, browser, until, by } from 'protractor';
+import { $, browser, until, by, ExpectedConditions as EC } from 'protractor';
 
 export class LoginPO {
 
@@ -31,7 +31,14 @@ export class LoginPO {
     }
 
     // sabemos que o login acabou quando aparecer o botão de logout
-    return browser.driver.wait(until.elementLocated(by.id('logoutButton')), 10000);
+    // e quando aparecer o título do form de criar pergunta
+    return browser.driver.wait(
+      EC.and(
+        EC.elementToBeClickable($('#logoutButton')),
+        EC.visibilityOf($('#qForm md-card-subtitle')),
+      )
+      // until.elementLocated(by.id('logoutButton'))
+    , 10000);
   }
 
 }

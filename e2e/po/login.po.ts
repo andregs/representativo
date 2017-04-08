@@ -20,10 +20,10 @@ export class LoginPO {
 
     const element = await Promise.race([username, button]);
     await browser.waitForAngularEnabled(false); // auth0 is not angular
+    await browser.driver.wait(until.elementIsVisible(element), 5000);
 
     if (await element.getTagName() === 'input') {
       // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
-      await browser.driver.wait(until.elementIsVisible(element), 5000);
       await $('input[name=username]').sendKeys(process.env.TEST_USERNAME);
       await $('input[name=password]').sendKeys(process.env.TEST_PASSWORD);
       await $('button[type=submit]').click();

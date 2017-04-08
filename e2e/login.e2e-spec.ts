@@ -6,17 +6,15 @@ beforeAll(async function () {
   const login = new LoginPO();
   await login.navigateTo();
   await login.login();
-  this.login = login;
-  this.toolbar = new ToolbarPO();
 });
 
 describe('Login Route', function () {
   let login: LoginPO;
   let toolbar: ToolbarPO;
 
-  beforeAll(function() {
-    login = this.login;
-    toolbar = this.toolbar;
+  beforeEach(function() {
+    login = new LoginPO();
+    toolbar = new ToolbarPO();
   });
 
   it('should not be authenticated yet', async function () {
@@ -37,6 +35,7 @@ describe('Login Route', function () {
   });
 
   it('should login the user', async function () {
+    await login.navigateTo();
     await login.login();
     expect(await toolbar.profileIcon)
       .toMatch('person');

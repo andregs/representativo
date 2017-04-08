@@ -14,12 +14,12 @@ export class LoginPO {
 
   async login() {
     const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
-    const username = browser.driver.wait(usernameIsLocated, 10000);
+    const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
     const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
-    const button = browser.driver.wait(loginButtonIsLocated, 10000);
+    const button = browser.driver.wait(loginButtonIsLocated, 10000, "where's the login button?");
 
     const element = await Promise.race([username, button]);
-    browser.waitForAngularEnabled(false); // auth0 is not angular
+    await browser.waitForAngularEnabled(false); // auth0 is not angular
 
     if (await element.getTagName() === 'input') {
       // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
@@ -34,14 +34,13 @@ export class LoginPO {
 
     // sabemos que o login acabou quando aparecer o botão de logout
     // e quando aparecer o título do form de criar pergunta
-    await browser.driver.wait(
-      EC.and(
-        EC.elementToBeClickable($('#logoutButton')),
-        EC.visibilityOf($('#qForm md-card-subtitle')),
-      )
-    , 10000);
+    const condition = EC.and(
+      EC.elementToBeClickable($('#logoutButton')),
+      EC.visibilityOf($('#qForm md-card-subtitle')),
+    );
 
-    browser.waitForAngularEnabled(true); // we're back to angular
+    await browser.driver.wait(condition, 10000, "I couldn't detect login success");
+    await browser.waitForAngularEnabled(true); // we're back to angular
   }
 
 }

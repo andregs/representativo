@@ -31,6 +31,22 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
     { browserName: 'firefox',           platform: 'Windows 7',   version: '47.0' },
     // { browserName: 'safari',            platform: 'macOS 10.12', version: '10.0' },
     // { browserName: 'internet explorer', platform: 'Windows 7',   version: '11.0', requireWindowFocus: true },
+    {
+      browserName: 'Browser',
+      platformName: 'Android',
+      platformVersion: '6.0',
+      deviceName: 'Android Emulator',
+      deviceOrientation: 'portrait',
+      recordScreenshots: false,
+    },
+    {
+      browserName: 'Safari',
+      platformName: 'iOS',
+      platformVersion: '10.2',
+      deviceName: 'iPhone Simulator',
+      deviceOrientation: 'portrait',
+      recordScreenshots: false,
+    },
   ];
 
   browsers.forEach(b => {

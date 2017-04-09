@@ -8,10 +8,7 @@ beforeAll(async function () {
   await login.login();
 });
 
-// Não consegui fazer os testes de login funcionarem bem no Sauce.
-// Acontece que, após o logout, alguns navegadores não conseguem fazer o login novamente.
-// Quero tentar novamente depois que o https://github.com/angular/blocking-proxy/ evoluir.
-xdescribe('Login Route', function () {
+(xdescribe('Login Route', function () {
   let login: LoginPO;
   let toolbar: ToolbarPO;
 
@@ -50,4 +47,8 @@ xdescribe('Login Route', function () {
       .toEqual(browser.baseUrl);
   });
 
-});
+}) as any)
+
+// Acontece que, após o logout, alguns navegadores não conseguem fazer o login novamente.
+// Quero tentar novamente depois que o https://github.com/angular/blocking-proxy/ evoluir.
+.pend('Não funcionam bem on Sauce. Tentar novamente quando angular/blocking-proxy evoluir');

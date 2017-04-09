@@ -20,9 +20,12 @@ exports.config = {
   // useBlockingProxy: true,
   // highlightDelay: 321,
   onPrepare: function () {
-    require('ts-node').register({
-      project: 'e2e'
-    });
+    require('ts-node').register({ project: 'e2e' });
+    jasmine.Suite.prototype.pend = function (message) {
+      // https://github.com/angular/protractor/issues/2454#issuecomment-292793280
+      this.markedPending = true;
+      this.children.forEach(spec => spec.pend(message));
+    };
   }
 };
 
@@ -37,7 +40,7 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
     { browserName: 'chrome',            platform: 'Linux',       version: '48.0' },
     { browserName: 'firefox',           platform: 'Windows 7',   version: '47.0' },
     // { browserName: 'internet explorer', platform: 'Windows 7',   version: '11.0', requireWindowFocus: true },
-    { browserName: 'safari',            platform: 'OS X 10.11',  version: '10.0' },
+    { browserName: 'safari',            platform: 'OS X 10.11',  version: '9.0' },
     {
       browserName: 'Browser',
       platformName: 'Android',

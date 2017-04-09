@@ -22,6 +22,7 @@ script:
 - npm run -s build-prod
 - npm test
 - nohup bash -c "npm start &" && sleep 7 && cat nohup.out
+- node node_modules/blocking-proxy/built/lib/bin.js --seleniumAddress https://ondemand.saucelabs.com:443/wd/hub --highlightDelay 500 --port 8001 &> /dev/null &
 - npm run -s e2e
 after_success: npm run coverage
 deploy:

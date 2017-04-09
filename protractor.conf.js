@@ -18,6 +18,7 @@ exports.config = {
   },
   SELENIUM_PROMISE_MANAGER: false,
   useBlockingProxy: true,
+  blockingProxyUrl: 'http://localhost:8001',
   highlightDelay: 500,
   onPrepare: function () {
     require('ts-node').register({
@@ -25,6 +26,11 @@ exports.config = {
     });
   }
 };
+
+function now() {
+  return new Date().toISOString().substr(0, 14)
+    + (new Date().getMinutes() < 30 ? '00' : '30');
+}
 
 if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
   const browsers = [
@@ -61,9 +67,11 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
   exports.config.sauceKey = process.env.SAUCE_ACCESS_KEY;
 
   if (process.env.SAUCE === 'true') {
-    exports.config.sauceBuild = `Local `
-      + new Date().toISOString().substr(0, 14)
-      + (new Date().getMinutes() < 30 ? '00' : '30');
+    exports.config.sauceBuild = `Local ` + now();
+    exports.config.multiCapabilities.forEach((cap, i) => {
+      cap.name = `Dev #${i} ${now()}`;
+      cap.tags = ['dev-sauce'];
+    });
 
   } else if (process.env.CI === 'true') {
     exports.config.sauceBuild = `Travis #${process.env.TRAVIS_BUILD_NUMBER}`;
@@ -78,4 +86,8 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
   exports.config.baseUrl = `http://localhost:3000/`;
   exports.config.seleniumAddress = 'http://localhost:4444/wd/hub';
   exports.config.directConnect = false;
+  exports.config.multiCapabilities.forEach(cap => {
+    cap.name = `Dev ` + now();
+    cap.tags = ['dev'];
+  });
 }

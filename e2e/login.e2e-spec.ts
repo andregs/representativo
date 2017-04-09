@@ -35,14 +35,14 @@ describe('Login Route', function () {
   });
 
   it('should login the user', async function () {
-    await login.navigateTo();
+    // await login.navigateTo();
     await login.login();
-    expect(true).toBe(true);
+    // expect(true).toBe(true);
     // await browser.sleep(1500);
-    // expect(await toolbar.profileIcon)
-    //   .toMatch('person');
-    // expect(await toolbar.logoutIcon)
-    //   .toMatch('power_settings_new');
+    expect(await toolbar.profileIcon)
+      .toMatch('person');
+    expect(await toolbar.logoutIcon)
+      .toMatch('power_settings_new');
   });
 
   it('should redirect the user after login', async function () {

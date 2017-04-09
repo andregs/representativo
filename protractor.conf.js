@@ -17,6 +17,8 @@ exports.config = {
     defaultTimeoutInterval: 2 * 60 * 1000
   },
   SELENIUM_PROMISE_MANAGER: false,
+  useBlockingProxy: true,
+  highlightDelay: 500,
   onPrepare: function () {
     require('ts-node').register({
       project: 'e2e'
@@ -74,5 +76,6 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
 
 } else {
   exports.config.baseUrl = `http://localhost:3000/`;
-  exports.config.directConnect = true;
+  exports.config.seleniumAddress = 'http://localhost:4444/wd/hub';
+  exports.config.directConnect = false;
 }

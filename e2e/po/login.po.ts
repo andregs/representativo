@@ -13,7 +13,7 @@ export class LoginPO {
   }
 
   async login() {
-    await browser.waitForAngularEnabled(false); // Auth0 não é Angular
+    // await browser.waitForAngularEnabled(false); // Auth0 não é Angular
     const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
     const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
     const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
@@ -35,7 +35,7 @@ export class LoginPO {
     // sabemos que o login acabou quando aparecer o botão de logout
     const logoutIsLocated = until.elementLocated(by.id('logoutButton'));
     await browser.driver.wait(logoutIsLocated, 10000, "where's the logout button?");
-    await browser.driver.sleep(1500);
+    // await browser.driver.sleep(1500);
     // await browser.waitForAngularEnabled(true); // de volta ao Angular
   }
 

@@ -34,8 +34,7 @@ export class LoginPO {
     }
 
     await browser.driver.sleep(5000);
-    await browser.waitForAngularEnabled(true); // we're back to angular
-    // await browser.refresh();
+    await browser.refresh();
 
     // sabemos que o login acabou quando aparecer o botão de logout
     // e quando aparecer o título do form de criar pergunta
@@ -44,7 +43,8 @@ export class LoginPO {
       EC.visibilityOf($('#qForm md-card-subtitle')),
     );
 
-    await browser.driver.wait(condition, 10000, "I couldn't detect login success");
+    await browser.wait(condition, 10000, "I couldn't detect login success");
+    await browser.waitForAngularEnabled(true); // we're back to angular
   }
 
 }

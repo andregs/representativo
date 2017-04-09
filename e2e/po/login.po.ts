@@ -1,4 +1,4 @@
-import { $, browser, until, by, ExpectedConditions as EC } from 'protractor';
+import { $, browser, until, by, ExpectedConditions as EC, WebElement } from 'protractor';
 
 export class LoginPO {
 
@@ -12,14 +12,52 @@ export class LoginPO {
     return $('md-card > h3').getText();
   }
 
-  async login() {
+  login() {
+    const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
+    const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
+    const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
+    const button = browser.driver.wait(loginButtonIsLocated, 10000, "where's the login button?");
+
+    let inputOrButton: WebElement;
+    return Promise.race([username, button])
+      .then(e => {
+        inputOrButton = e;
+        return browser.waitForAngularEnabled(false); // Auth0 não é Angular
+      })
+      .then(() => browser.driver.wait(until.elementIsVisible(inputOrButton), 5000))
+      .then(() => browser.driver.sleep(1500))
+      .then(() => inputOrButton.getTagName())
+      .then(tagName => {
+        if (tagName === 'input') {
+          // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
+          return $('input[name=username]').sendKeys(process.env.TEST_USERNAME)
+            .then(() => $('input[name=password]').sendKeys(process.env.TEST_PASSWORD))
+            .then(() => $('button[type=submit]').click());
+        } else {
+          // mas às vezes ele exige apenas que vc clique num botão p/ repetir o último login
+          return inputOrButton.click();
+        }
+      })
+      .then(() => {
+        // sabemos que o login acabou quando aparecer o botão de logout
+        // e quando aparecer o título do form de criar pergunta
+        const condition = EC.and(
+          EC.visibilityOf($('#logoutButton')),
+          EC.visibilityOf($('#qForm md-card-subtitle')),
+        );
+        return browser.wait(condition, 10000, "I couldn't detect login success");
+      })
+      .then(() => browser.waitForAngularEnabled(true)); // de volta ao Angular
+  }
+
+  async login2() {
     const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
     const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
     const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
     const button = browser.driver.wait(loginButtonIsLocated, 10000, "where's the login button?");
 
     const element = await Promise.race([username, button]);
-    await browser.waitForAngularEnabled(false); // auth0 is not angular
+    await browser.waitForAngularEnabled(false); // Auth0 não é Angular
     await browser.driver.wait(until.elementIsVisible(element), 5000);
     await browser.driver.sleep(1500);
 
@@ -33,9 +71,6 @@ export class LoginPO {
       await element.click();
     }
 
-    await browser.driver.sleep(5000);
-    await browser.refresh();
-
     // sabemos que o login acabou quando aparecer o botão de logout
     // e quando aparecer o título do form de criar pergunta
     const condition = EC.and(
@@ -44,7 +79,7 @@ export class LoginPO {
     );
 
     await browser.wait(condition, 10000, "I couldn't detect login success");
-    await browser.waitForAngularEnabled(true); // we're back to angular
+    await browser.waitForAngularEnabled(true); // de volta ao Angular
   }
 
 }

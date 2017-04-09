@@ -21,7 +21,7 @@ export class LoginPO {
     const element = await Promise.race([username, button]);
     await browser.waitForAngularEnabled(false); // auth0 is not angular
     await browser.driver.wait(until.elementIsVisible(element), 5000);
-    await browser.driver.sleep(3000);
+    await browser.driver.sleep(1500);
 
     if (await element.getTagName() === 'input') {
       // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
@@ -33,15 +33,18 @@ export class LoginPO {
       await element.click();
     }
 
+    await browser.driver.sleep(5000);
+    await browser.waitForAngularEnabled(true); // we're back to angular
+    // await browser.refresh();
+
     // sabemos que o login acabou quando aparecer o botão de logout
     // e quando aparecer o título do form de criar pergunta
     const condition = EC.and(
-      EC.elementToBeClickable($('#logoutButton')),
+      EC.visibilityOf($('#logoutButton')),
       EC.visibilityOf($('#qForm md-card-subtitle')),
     );
 
     await browser.driver.wait(condition, 10000, "I couldn't detect login success");
-    await browser.waitForAngularEnabled(true); // we're back to angular
   }
 
 }

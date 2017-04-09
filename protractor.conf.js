@@ -17,9 +17,8 @@ exports.config = {
     defaultTimeoutInterval: 2 * 60 * 1000
   },
   SELENIUM_PROMISE_MANAGER: false,
-  useBlockingProxy: true,
-  blockingProxyUrl: 'http://localhost:8001',
-  highlightDelay: 500,
+  // useBlockingProxy: true,
+  // highlightDelay: 321,
   onPrepare: function () {
     require('ts-node').register({
       project: 'e2e'
@@ -38,8 +37,7 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
     { browserName: 'chrome',            platform: 'Linux',       version: '48.0' },
     { browserName: 'firefox',           platform: 'Windows 7',   version: '47.0' },
     // { browserName: 'internet explorer', platform: 'Windows 7',   version: '11.0', requireWindowFocus: true },
-    // { browserName: 'safari',            platform: 'macOS 10.12', version: '10.0' },
-    { browserName: 'safari',            platform: 'OS X 10.11',  version: '9.0' },
+    { browserName: 'safari',            platform: 'OS X 10.11',  version: '10.0' },
     {
       browserName: 'Browser',
       platformName: 'Android',
@@ -85,7 +83,7 @@ if (process.env.SAUCE === 'true' || process.env.CI === 'true') {
 } else {
   exports.config.baseUrl = `http://localhost:3000/`;
   exports.config.seleniumAddress = 'http://localhost:4444/wd/hub';
-  exports.config.directConnect = false;
+  exports.config.directConnect = true;
   exports.config.multiCapabilities.forEach(cap => {
     cap.name = `Dev ` + now();
     cap.tags = ['dev'];

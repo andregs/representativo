@@ -1,4 +1,4 @@
-import { $, browser, until, by, ExpectedConditions as EC, WebElement } from 'protractor';
+import { $, browser, until, by, ExpectedConditions as EC } from 'protractor';
 
 export class LoginPO {
 

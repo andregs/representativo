@@ -12,45 +12,7 @@ export class LoginPO {
     return $('md-card > h3').getText();
   }
 
-  login() {
-    const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
-    const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
-    const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
-    const button = browser.driver.wait(loginButtonIsLocated, 10000, "where's the login button?");
-
-    let inputOrButton: WebElement;
-    return Promise.race([username, button])
-      .then(e => {
-        inputOrButton = e;
-        return browser.waitForAngularEnabled(false); // Auth0 não é Angular
-      })
-      .then(() => browser.driver.wait(until.elementIsVisible(inputOrButton), 5000))
-      .then(() => browser.driver.sleep(1500))
-      .then(() => inputOrButton.getTagName())
-      .then(tagName => {
-        if (tagName === 'input') {
-          // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
-          return $('input[name=username]').sendKeys(process.env.TEST_USERNAME)
-            .then(() => $('input[name=password]').sendKeys(process.env.TEST_PASSWORD))
-            .then(() => $('button[type=submit]').click());
-        } else {
-          // mas às vezes ele exige apenas que vc clique num botão p/ repetir o último login
-          return inputOrButton.click();
-        }
-      })
-      .then(() => {
-        // sabemos que o login acabou quando aparecer o botão de logout
-        // e quando aparecer o título do form de criar pergunta
-        const condition = EC.and(
-          EC.visibilityOf($('#logoutButton')),
-          EC.visibilityOf($('#qForm md-card-subtitle')),
-        );
-        return browser.wait(condition, 10000, "I couldn't detect login success");
-      })
-      .then(() => browser.waitForAngularEnabled(true)); // de volta ao Angular
-  }
-
-  async login2() {
+  async login() {
     const usernameIsLocated = until.elementLocated(by.css('input[name=username]'));
     const username = browser.driver.wait(usernameIsLocated, 10000, "where's the username field?");
     const loginButtonIsLocated = until.elementLocated(by.css('.auth0-lock-last-login-pane > button'));
@@ -78,7 +40,8 @@ export class LoginPO {
       EC.visibilityOf($('#qForm md-card-subtitle')),
     );
 
-    await browser.wait(condition, 10000, "I couldn't detect login success");
+    await browser.driver.sleep(1500);
+    await browser.driver.wait(condition, 10000, "I couldn't detect login success");
     await browser.waitForAngularEnabled(true); // de volta ao Angular
   }
 

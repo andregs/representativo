@@ -26,22 +26,13 @@ export class LoginPO {
       // o widget de login do Auth0 às vezes exige que vc entre com usuário e senha
       await $('input[name=username]').sendKeys(process.env.TEST_USERNAME);
       await $('input[name=password]').sendKeys(process.env.TEST_PASSWORD);
-      await browser.waitForAngularEnabled(false);
       await $('button[type=submit]').click();
     } else {
       // mas às vezes ele exige apenas que vc clique num botão p/ repetir o último login
-      await browser.waitForAngularEnabled(false);
       await element.click();
     }
-    await browser.waitForAngularEnabled(false);
 
     // sabemos que o login acabou quando aparecer o botão de logout
-    // e quando aparecer o título do form de criar pergunta
-    // const condition = EC.and(
-    //   EC.visibilityOf($('#logoutButton')),
-    //   EC.visibilityOf($('#qForm md-card-subtitle')),
-    // );
-
     const logoutIsLocated = until.elementLocated(by.id('logoutButton'));
     await browser.driver.wait(logoutIsLocated, 10000, "where's the logout button?");
     await browser.driver.sleep(1500);

@@ -35,6 +35,7 @@ describe('Login Route', function () {
   });
 
   it('should login the user', async function () {
+    await browser.refresh();
     await login.login();
     expect(await toolbar.profileIcon)
       .toMatch('person');

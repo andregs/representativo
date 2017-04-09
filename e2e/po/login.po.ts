@@ -36,7 +36,7 @@ export class LoginPO {
     const logoutIsLocated = until.elementLocated(by.id('logoutButton'));
     await browser.driver.wait(logoutIsLocated, 10000, "where's the logout button?");
     await browser.driver.sleep(1500);
-    await browser.waitForAngularEnabled(true); // de volta ao Angular
+    // await browser.waitForAngularEnabled(true); // de volta ao Angular
   }
 
 }
